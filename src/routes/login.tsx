@@ -55,6 +55,9 @@ function LoginPage() {
               className="w-full h-11 px-4 rounded-full border border-input bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
             />
           </div>
+          <div className="text-right">
+            <Link to="/forgot-password" className="text-xs text-primary font-medium hover:underline">Forgot password?</Link>
+          </div>
           <Button variant="premium" size="lg" className="w-full">
             Log in
           </Button>

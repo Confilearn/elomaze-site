@@ -13,7 +13,7 @@ export function Footer() {
               <span className="text-xl font-bold tracking-tight">Elomaze</span>
             </div>
             <p className="text-sm opacity-60 leading-relaxed">
-              Trusted homes, services & community insights across Nigeria.
+              Trusted homes across Nigeria. Find verified properties with confidence.
             </p>
           </div>
 
@@ -21,8 +21,8 @@ export function Footer() {
             <h4 className="font-semibold text-sm mb-4">Explore</h4>
             <div className="flex flex-col gap-2.5">
               <Link to="/properties" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Properties</Link>
-              <Link to="/services" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Services</Link>
-              <Link to="/community" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Community</Link>
+              <Link to="/saved" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Saved Homes</Link>
+              <Link to="/messages" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Messages</Link>
             </div>
           </div>
 
@@ -30,18 +30,17 @@ export function Footer() {
             <h4 className="font-semibold text-sm mb-4">Company</h4>
             <div className="flex flex-col gap-2.5">
               <Link to="/about" className="text-sm opacity-60 hover:opacity-100 transition-opacity">About</Link>
-              <span className="text-sm opacity-60">Careers</span>
-              <span className="text-sm opacity-60">Press</span>
+              <Link to="/contact" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Contact</Link>
+              <Link to="/privacy" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Privacy Policy</Link>
             </div>
           </div>
 
           <div>
-            <h4 className="font-semibold text-sm mb-4">Support</h4>
+            <h4 className="font-semibold text-sm mb-4">Account</h4>
             <div className="flex flex-col gap-2.5">
-              <span className="text-sm opacity-60">Help Center</span>
-              <span className="text-sm opacity-60">Safety</span>
-              <span className="text-sm opacity-60">Terms</span>
-              <span className="text-sm opacity-60">Privacy</span>
+              <Link to="/login" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Log in</Link>
+              <Link to="/register" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Sign up</Link>
+              <Link to="/agent-dashboard" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Agent Dashboard</Link>
             </div>
           </div>
         </div>

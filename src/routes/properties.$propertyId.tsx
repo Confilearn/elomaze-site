@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MapPin, Bed, Bath, BadgeCheck, Phone, ArrowLeft, Heart, Share2, Shield, Zap, Car, Droplets, Gauge } from "lucide-react";
+import { MapPin, Bed, Bath, BadgeCheck, Phone, ArrowLeft, Heart, Share2, Shield, Zap, Car, Droplets, Gauge, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { properties } from "@/lib/data";
 import { PropertyCard } from "@/components/PropertyCard";
@@ -52,7 +52,7 @@ function PropertyDetailsPage() {
   const relatedProperties = properties.filter((p) => p.id !== property.id).slice(0, 3);
 
   return (
-    <div className="pb-24 lg:pb-12">
+    <div className="pb-32 lg:pb-12">
       {/* Top Nav */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between">
@@ -130,7 +130,7 @@ function PropertyDetailsPage() {
               </div>
             </div>
 
-            {/* Area Map Placeholder */}
+            {/* Location */}
             <div className="mt-8">
               <h2 className="text-lg font-semibold text-foreground mb-3">Location</h2>
               <div className="rounded-2xl bg-secondary h-48 flex items-center justify-center">
@@ -142,18 +142,19 @@ function PropertyDetailsPage() {
             </div>
           </div>
 
-          {/* Sidebar - Agent & Pricing */}
+          {/* Sidebar */}
           <div>
             <div className="sticky top-24 space-y-4">
               <div className="rounded-2xl border border-border p-6 premium-shadow">
                 <p className="text-2xl font-bold text-primary">{property.priceLabel}</p>
                 <div className="mt-6 space-y-3">
                   <Button variant="premium" size="lg" className="w-full gap-2">
-                    <Phone className="w-4 h-4" />
-                    Contact Agent
+                    <MessageCircle className="w-4 h-4" />
+                    Message Agent
                   </Button>
-                  <Button variant="outline" size="lg" className="w-full">
-                    Schedule Visit
+                  <Button variant="outline" size="lg" className="w-full gap-2">
+                    <Phone className="w-4 h-4" />
+                    Call Agent
                   </Button>
                 </div>
               </div>
@@ -182,6 +183,23 @@ function PropertyDetailsPage() {
               <PropertyCard key={p.id} property={p} />
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Mobile Sticky CTA */}
+      <div className="lg:hidden fixed bottom-16 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-t border-border/50 px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
+        <div className="flex items-center gap-3">
+          <div className="flex-1 min-w-0">
+            <p className="text-lg font-bold text-primary truncate">{property.priceLabel}</p>
+          </div>
+          <Button variant="premium" size="sm" className="gap-1.5 shrink-0">
+            <MessageCircle className="w-4 h-4" />
+            Message
+          </Button>
+          <Button variant="outline" size="sm" className="gap-1.5 shrink-0">
+            <Phone className="w-4 h-4" />
+            Call
+          </Button>
         </div>
       </div>
     </div>

@@ -9,21 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SavedRouteImport } from './routes/saved'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as PropertiesRouteImport } from './routes/properties'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as MessagesRouteImport } from './routes/messages'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as CommunityRouteImport } from './routes/community'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AgentDashboardRouteImport } from './routes/agent-dashboard'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicesServiceIdRouteImport } from './routes/services.$serviceId'
 import { Route as PropertiesPropertyIdRouteImport } from './routes/properties.$propertyId'
-import { Route as CommunityLocationIdRouteImport } from './routes/community.$locationId'
 
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterRoute = RegisterRouteImport.update({
@@ -36,19 +38,39 @@ const PropertiesRoute = PropertiesRouteImport.update({
   path: '/properties',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MessagesRoute = MessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CommunityRoute = CommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentDashboardRoute = AgentDashboardRouteImport.update({
+  id: '/agent-dashboard',
+  path: '/agent-dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -61,122 +83,128 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesServiceIdRoute = ServicesServiceIdRouteImport.update({
-  id: '/$serviceId',
-  path: '/$serviceId',
-  getParentRoute: () => ServicesRoute,
-} as any)
 const PropertiesPropertyIdRoute = PropertiesPropertyIdRouteImport.update({
   id: '/$propertyId',
   path: '/$propertyId',
   getParentRoute: () => PropertiesRoute,
 } as any)
-const CommunityLocationIdRoute = CommunityLocationIdRouteImport.update({
-  id: '/$locationId',
-  path: '/$locationId',
-  getParentRoute: () => CommunityRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/community': typeof CommunityRouteWithChildren
-  '/dashboard': typeof DashboardRoute
+  '/agent-dashboard': typeof AgentDashboardRoute
+  '/contact': typeof ContactRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/messages': typeof MessagesRoute
+  '/privacy': typeof PrivacyRoute
+  '/profile': typeof ProfileRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/register': typeof RegisterRoute
-  '/services': typeof ServicesRouteWithChildren
-  '/community/$locationId': typeof CommunityLocationIdRoute
+  '/saved': typeof SavedRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
-  '/services/$serviceId': typeof ServicesServiceIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/community': typeof CommunityRouteWithChildren
-  '/dashboard': typeof DashboardRoute
+  '/agent-dashboard': typeof AgentDashboardRoute
+  '/contact': typeof ContactRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/messages': typeof MessagesRoute
+  '/privacy': typeof PrivacyRoute
+  '/profile': typeof ProfileRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/register': typeof RegisterRoute
-  '/services': typeof ServicesRouteWithChildren
-  '/community/$locationId': typeof CommunityLocationIdRoute
+  '/saved': typeof SavedRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
-  '/services/$serviceId': typeof ServicesServiceIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/community': typeof CommunityRouteWithChildren
-  '/dashboard': typeof DashboardRoute
+  '/agent-dashboard': typeof AgentDashboardRoute
+  '/contact': typeof ContactRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/messages': typeof MessagesRoute
+  '/privacy': typeof PrivacyRoute
+  '/profile': typeof ProfileRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/register': typeof RegisterRoute
-  '/services': typeof ServicesRouteWithChildren
-  '/community/$locationId': typeof CommunityLocationIdRoute
+  '/saved': typeof SavedRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
-  '/services/$serviceId': typeof ServicesServiceIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/community'
-    | '/dashboard'
+    | '/agent-dashboard'
+    | '/contact'
+    | '/forgot-password'
     | '/login'
+    | '/messages'
+    | '/privacy'
+    | '/profile'
     | '/properties'
     | '/register'
-    | '/services'
-    | '/community/$locationId'
+    | '/saved'
     | '/properties/$propertyId'
-    | '/services/$serviceId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/community'
-    | '/dashboard'
+    | '/agent-dashboard'
+    | '/contact'
+    | '/forgot-password'
     | '/login'
+    | '/messages'
+    | '/privacy'
+    | '/profile'
     | '/properties'
     | '/register'
-    | '/services'
-    | '/community/$locationId'
+    | '/saved'
     | '/properties/$propertyId'
-    | '/services/$serviceId'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/community'
-    | '/dashboard'
+    | '/agent-dashboard'
+    | '/contact'
+    | '/forgot-password'
     | '/login'
+    | '/messages'
+    | '/privacy'
+    | '/profile'
     | '/properties'
     | '/register'
-    | '/services'
-    | '/community/$locationId'
+    | '/saved'
     | '/properties/$propertyId'
-    | '/services/$serviceId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  CommunityRoute: typeof CommunityRouteWithChildren
-  DashboardRoute: typeof DashboardRoute
+  AgentDashboardRoute: typeof AgentDashboardRoute
+  ContactRoute: typeof ContactRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
+  MessagesRoute: typeof MessagesRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ProfileRoute: typeof ProfileRoute
   PropertiesRoute: typeof PropertiesRouteWithChildren
   RegisterRoute: typeof RegisterRoute
-  ServicesRoute: typeof ServicesRouteWithChildren
+  SavedRoute: typeof SavedRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register': {
@@ -193,6 +221,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/messages': {
+      id: '/messages'
+      path: '/messages'
+      fullPath: '/messages'
+      preLoaderRoute: typeof MessagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -200,18 +249,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/community': {
-      id: '/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof CommunityRouteImport
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agent-dashboard': {
+      id: '/agent-dashboard'
+      path: '/agent-dashboard'
+      fullPath: '/agent-dashboard'
+      preLoaderRoute: typeof AgentDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -228,13 +284,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/$serviceId': {
-      id: '/services/$serviceId'
-      path: '/$serviceId'
-      fullPath: '/services/$serviceId'
-      preLoaderRoute: typeof ServicesServiceIdRouteImport
-      parentRoute: typeof ServicesRoute
-    }
     '/properties/$propertyId': {
       id: '/properties/$propertyId'
       path: '/$propertyId'
@@ -242,27 +291,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertiesPropertyIdRouteImport
       parentRoute: typeof PropertiesRoute
     }
-    '/community/$locationId': {
-      id: '/community/$locationId'
-      path: '/$locationId'
-      fullPath: '/community/$locationId'
-      preLoaderRoute: typeof CommunityLocationIdRouteImport
-      parentRoute: typeof CommunityRoute
-    }
   }
 }
-
-interface CommunityRouteChildren {
-  CommunityLocationIdRoute: typeof CommunityLocationIdRoute
-}
-
-const CommunityRouteChildren: CommunityRouteChildren = {
-  CommunityLocationIdRoute: CommunityLocationIdRoute,
-}
-
-const CommunityRouteWithChildren = CommunityRoute._addFileChildren(
-  CommunityRouteChildren,
-)
 
 interface PropertiesRouteChildren {
   PropertiesPropertyIdRoute: typeof PropertiesPropertyIdRoute
@@ -276,27 +306,19 @@ const PropertiesRouteWithChildren = PropertiesRoute._addFileChildren(
   PropertiesRouteChildren,
 )
 
-interface ServicesRouteChildren {
-  ServicesServiceIdRoute: typeof ServicesServiceIdRoute
-}
-
-const ServicesRouteChildren: ServicesRouteChildren = {
-  ServicesServiceIdRoute: ServicesServiceIdRoute,
-}
-
-const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
-  ServicesRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  CommunityRoute: CommunityRouteWithChildren,
-  DashboardRoute: DashboardRoute,
+  AgentDashboardRoute: AgentDashboardRoute,
+  ContactRoute: ContactRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
+  MessagesRoute: MessagesRoute,
+  PrivacyRoute: PrivacyRoute,
+  ProfileRoute: ProfileRoute,
   PropertiesRoute: PropertiesRouteWithChildren,
   RegisterRoute: RegisterRoute,
-  ServicesRoute: ServicesRouteWithChildren,
+  SavedRoute: SavedRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
