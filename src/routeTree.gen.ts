@@ -9,23 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as CommunityRouteImport } from './routes/community'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicesServiceIdRouteImport } from './routes/services.$serviceId'
 import { Route as PropertiesPropertyIdRouteImport } from './routes/properties.$propertyId'
-import { Route as CommunityLocationIdRouteImport } from './routes/community.$locationId'
 
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -46,11 +37,6 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CommunityRoute = CommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -61,124 +47,81 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesServiceIdRoute = ServicesServiceIdRouteImport.update({
-  id: '/$serviceId',
-  path: '/$serviceId',
-  getParentRoute: () => ServicesRoute,
-} as any)
 const PropertiesPropertyIdRoute = PropertiesPropertyIdRouteImport.update({
   id: '/$propertyId',
   path: '/$propertyId',
   getParentRoute: () => PropertiesRoute,
 } as any)
-const CommunityLocationIdRoute = CommunityLocationIdRouteImport.update({
-  id: '/$locationId',
-  path: '/$locationId',
-  getParentRoute: () => CommunityRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/community': typeof CommunityRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/register': typeof RegisterRoute
-  '/services': typeof ServicesRouteWithChildren
-  '/community/$locationId': typeof CommunityLocationIdRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
-  '/services/$serviceId': typeof ServicesServiceIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/community': typeof CommunityRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/register': typeof RegisterRoute
-  '/services': typeof ServicesRouteWithChildren
-  '/community/$locationId': typeof CommunityLocationIdRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
-  '/services/$serviceId': typeof ServicesServiceIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/community': typeof CommunityRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/register': typeof RegisterRoute
-  '/services': typeof ServicesRouteWithChildren
-  '/community/$locationId': typeof CommunityLocationIdRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
-  '/services/$serviceId': typeof ServicesServiceIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/community'
     | '/dashboard'
     | '/login'
     | '/properties'
     | '/register'
-    | '/services'
-    | '/community/$locationId'
     | '/properties/$propertyId'
-    | '/services/$serviceId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/community'
     | '/dashboard'
     | '/login'
     | '/properties'
     | '/register'
-    | '/services'
-    | '/community/$locationId'
     | '/properties/$propertyId'
-    | '/services/$serviceId'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/community'
     | '/dashboard'
     | '/login'
     | '/properties'
     | '/register'
-    | '/services'
-    | '/community/$locationId'
     | '/properties/$propertyId'
-    | '/services/$serviceId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  CommunityRoute: typeof CommunityRouteWithChildren
   DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
   PropertiesRoute: typeof PropertiesRouteWithChildren
   RegisterRoute: typeof RegisterRoute
-  ServicesRoute: typeof ServicesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/register': {
       id: '/register'
       path: '/register'
@@ -207,13 +150,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/community': {
-      id: '/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof CommunityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -228,13 +164,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/$serviceId': {
-      id: '/services/$serviceId'
-      path: '/$serviceId'
-      fullPath: '/services/$serviceId'
-      preLoaderRoute: typeof ServicesServiceIdRouteImport
-      parentRoute: typeof ServicesRoute
-    }
     '/properties/$propertyId': {
       id: '/properties/$propertyId'
       path: '/$propertyId'
@@ -242,27 +171,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertiesPropertyIdRouteImport
       parentRoute: typeof PropertiesRoute
     }
-    '/community/$locationId': {
-      id: '/community/$locationId'
-      path: '/$locationId'
-      fullPath: '/community/$locationId'
-      preLoaderRoute: typeof CommunityLocationIdRouteImport
-      parentRoute: typeof CommunityRoute
-    }
   }
 }
-
-interface CommunityRouteChildren {
-  CommunityLocationIdRoute: typeof CommunityLocationIdRoute
-}
-
-const CommunityRouteChildren: CommunityRouteChildren = {
-  CommunityLocationIdRoute: CommunityLocationIdRoute,
-}
-
-const CommunityRouteWithChildren = CommunityRoute._addFileChildren(
-  CommunityRouteChildren,
-)
 
 interface PropertiesRouteChildren {
   PropertiesPropertyIdRoute: typeof PropertiesPropertyIdRoute
@@ -276,27 +186,13 @@ const PropertiesRouteWithChildren = PropertiesRoute._addFileChildren(
   PropertiesRouteChildren,
 )
 
-interface ServicesRouteChildren {
-  ServicesServiceIdRoute: typeof ServicesServiceIdRoute
-}
-
-const ServicesRouteChildren: ServicesRouteChildren = {
-  ServicesServiceIdRoute: ServicesServiceIdRoute,
-}
-
-const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
-  ServicesRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  CommunityRoute: CommunityRouteWithChildren,
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
   PropertiesRoute: PropertiesRouteWithChildren,
   RegisterRoute: RegisterRoute,
-  ServicesRoute: ServicesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
