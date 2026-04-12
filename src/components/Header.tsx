@@ -10,7 +10,6 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-sm">E</span>
@@ -18,7 +17,6 @@ export function Header() {
             <span className="text-xl font-bold text-foreground tracking-tight">Elomaze</span>
           </Link>
 
-          {/* Center Search - Desktop */}
           <div className="hidden lg:flex items-center flex-1 max-w-md mx-8">
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -30,19 +28,15 @@ export function Header() {
             </div>
           </div>
 
-          {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">
             <Link to="/properties" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
               Properties
             </Link>
-            <Link to="/services" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
-              Services
-            </Link>
-            <Link to="/community" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
-              Community
-            </Link>
             <Link to="/about" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
               About
+            </Link>
+            <Link to="/contact" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
+              Contact
             </Link>
             <div className="w-px h-6 bg-border mx-2" />
             <Link to="/login" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
@@ -53,7 +47,6 @@ export function Header() {
             </Button>
           </nav>
 
-          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 text-foreground"
@@ -62,7 +55,6 @@ export function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden pb-4 animate-fade-up">
             <div className="relative mb-4">
@@ -75,9 +67,8 @@ export function Header() {
             </div>
             <nav className="flex flex-col gap-1">
               <Link to="/properties" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Properties</Link>
-              <Link to="/services" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Services</Link>
-              <Link to="/community" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Community</Link>
               <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">About</Link>
+              <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Contact</Link>
               <div className="h-px bg-border my-2" />
               <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Log in</Link>
               <Button variant="premium" className="mt-2" asChild>

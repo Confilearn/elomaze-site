@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Home, Search, MessageCircle, Heart, User } from "lucide-react";
+import { Home, Search, Heart, MessageCircle, User } from "lucide-react";
 
 export function MobileNav() {
   return (
@@ -13,15 +13,15 @@ export function MobileNav() {
           <Search className="w-5 h-5" />
           <span className="text-[10px] font-medium">Search</span>
         </Link>
-        <Link to="/community" className="flex flex-col items-center gap-1 text-muted-foreground transition-colors" activeProps={{ className: "flex flex-col items-center gap-1 text-primary" }}>
-          <MessageCircle className="w-5 h-5" />
-          <span className="text-[10px] font-medium">Community</span>
-        </Link>
-        <Link to="/dashboard" className="flex flex-col items-center gap-1 text-muted-foreground transition-colors" activeProps={{ className: "flex flex-col items-center gap-1 text-primary" }}>
+        <Link to="/saved" className="flex flex-col items-center gap-1 text-muted-foreground transition-colors" activeProps={{ className: "flex flex-col items-center gap-1 text-primary" }}>
           <Heart className="w-5 h-5" />
           <span className="text-[10px] font-medium">Saved</span>
         </Link>
-        <Link to="/login" className="flex flex-col items-center gap-1 text-muted-foreground transition-colors" activeProps={{ className: "flex flex-col items-center gap-1 text-primary" }}>
+        <Link to="/messages" className="flex flex-col items-center gap-1 text-muted-foreground transition-colors" activeProps={{ className: "flex flex-col items-center gap-1 text-primary" }}>
+          <MessageCircle className="w-5 h-5" />
+          <span className="text-[10px] font-medium">Messages</span>
+        </Link>
+        <Link to="/profile" className="flex flex-col items-center gap-1 text-muted-foreground transition-colors" activeProps={{ className: "flex flex-col items-center gap-1 text-primary" }}>
           <User className="w-5 h-5" />
           <span className="text-[10px] font-medium">Profile</span>
         </Link>

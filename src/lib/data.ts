@@ -16,30 +16,6 @@ export interface Property {
   agent: { name: string; phone: string; image: string };
 }
 
-export interface Service {
-  id: string;
-  name: string;
-  category: string;
-  location: string;
-  price: string;
-  rating: number;
-  reviews: number;
-  image: string;
-  verified: boolean;
-  description: string;
-}
-
-export interface CommunityQuestion {
-  id: string;
-  question: string;
-  answer: string;
-  location: string;
-  upvotes: number;
-  helpful: boolean;
-  author: string;
-  date: string;
-}
-
 export const properties: Property[] = [
   {
     id: "1",
@@ -84,7 +60,7 @@ export const properties: Property[] = [
     priceLabel: "₦250,000/yr",
     beds: 1,
     baths: 1,
-    type: "Hostel",
+    type: "Student Lodge",
     image: "property-3",
     verified: true,
     featured: false,
@@ -118,7 +94,7 @@ export const properties: Property[] = [
     priceLabel: "₦1,200,000/yr",
     beds: 1,
     baths: 1,
-    type: "Mini Flat",
+    type: "Self Contain",
     image: "property-5",
     verified: true,
     featured: false,
@@ -135,7 +111,7 @@ export const properties: Property[] = [
     priceLabel: "₦65,000,000",
     beds: 4,
     baths: 4,
-    type: "House",
+    type: "Duplex",
     image: "property-6",
     verified: true,
     featured: true,
@@ -143,172 +119,98 @@ export const properties: Property[] = [
     description: "Premium 4-bedroom detached house in the exclusive GRA area of Port Harcourt. Large compound, beautiful garden, and top-notch security.",
     agent: { name: "Ngozi Ibe", phone: "+234 806 789 0123", image: "" },
   },
-];
-
-export const services: Service[] = [
   {
-    id: "s1",
-    name: "QuickMove Logistics",
-    category: "Movers",
-    location: "Lagos",
-    price: "From ₦25,000",
-    rating: 4.8,
-    reviews: 234,
-    image: "🚚",
+    id: "7",
+    title: "2-Bedroom Flat in Enugu",
+    location: "Independence Layout, Enugu",
+    city: "Enugu",
+    price: 800000,
+    priceLabel: "₦800,000/yr",
+    beds: 2,
+    baths: 2,
+    type: "Apartment",
+    image: "property-1",
     verified: true,
-    description: "Professional moving and logistics services across Lagos. We handle packing, loading, transportation, and unpacking with care.",
+    featured: false,
+    amenities: ["Borehole", "Security", "Parking", "Prepaid Meter"],
+    description: "Spacious 2-bedroom flat in the serene Independence Layout. Close to major amenities, schools, and markets.",
+    agent: { name: "Emeka Nwosu", phone: "+234 807 890 1234", image: "" },
   },
   {
-    id: "s2",
-    name: "SparkFix Electricals",
-    category: "Electricians",
-    location: "Abuja",
-    price: "From ₦5,000",
-    rating: 4.9,
-    reviews: 189,
-    image: "⚡",
+    id: "8",
+    title: "Executive 3-Bed Apartment",
+    location: "Awka, Anambra",
+    city: "Awka",
+    price: 1500000,
+    priceLabel: "₦1,500,000/yr",
+    beds: 3,
+    baths: 2,
+    type: "Apartment",
+    image: "property-2",
     verified: true,
-    description: "Licensed electricians for all your electrical needs. From wiring to repairs, we've got you covered.",
-  },
-  {
-    id: "s3",
-    name: "PipeWorks NG",
-    category: "Plumbers",
-    location: "Lagos",
-    price: "From ₦8,000",
-    rating: 4.7,
-    reviews: 156,
-    image: "🔧",
-    verified: true,
-    description: "Expert plumbing solutions for homes and offices. Available 24/7 for emergencies.",
-  },
-  {
-    id: "s4",
-    name: "FreshPress Laundry",
-    category: "Laundry",
-    location: "Port Harcourt",
-    price: "From ₦3,000",
-    rating: 4.6,
-    reviews: 312,
-    image: "👕",
-    verified: true,
-    description: "Premium laundry and dry cleaning services with free pickup and delivery.",
-  },
-  {
-    id: "s5",
-    name: "CleanSpace NG",
-    category: "Cleaning",
-    location: "Lagos",
-    price: "From ₦15,000",
-    rating: 4.8,
-    reviews: 278,
-    image: "✨",
-    verified: true,
-    description: "Professional home and office cleaning services. Deep cleaning, regular maintenance, and post-construction cleanup.",
-  },
-  {
-    id: "s6",
-    name: "NetConnect Pro",
-    category: "Internet Setup",
-    location: "Abuja",
-    price: "From ₦10,000",
-    rating: 4.5,
-    reviews: 145,
-    image: "📡",
-    verified: true,
-    description: "Fast internet installation and setup. We work with all major ISPs for the best rates.",
-  },
-  {
-    id: "s7",
-    name: "SwiftRider Dispatch",
-    category: "Dispatch Riders",
-    location: "Lagos",
-    price: "From ₦1,500",
-    rating: 4.7,
-    reviews: 456,
-    image: "🏍️",
-    verified: true,
-    description: "Fast and reliable dispatch services across Lagos. Same-day delivery guaranteed.",
-  },
-  {
-    id: "s8",
-    name: "GuardForce Security",
-    category: "Security",
-    location: "Benin City",
-    price: "From ₦50,000/mo",
-    rating: 4.9,
-    reviews: 98,
-    image: "🛡️",
-    verified: true,
-    description: "Professional security guard services and CCTV installation for homes and businesses.",
-  },
-];
-
-export const communityQuestions: CommunityQuestion[] = [
-  {
-    id: "q1",
-    question: "Best route to Apapa from Festac?",
-    answer: "Leave before 6:30am to avoid traffic. Use the Amuwo-Odofin link bridge — it's faster than going through Mile 2.",
-    location: "Apapa",
-    upvotes: 47,
-    helpful: true,
-    author: "Lagos Commuter",
-    date: "2 days ago",
-  },
-  {
-    id: "q2",
-    question: "Is Yaba safe for students?",
-    answer: "Yes, but stay near main roads. Areas around Unilag and Yaba Tech are well-populated. Avoid walking alone late at night in quiet streets.",
-    location: "Yaba",
-    upvotes: 83,
-    helpful: true,
-    author: "UNILAG Grad",
-    date: "1 week ago",
-  },
-  {
-    id: "q3",
-    question: "Affordable hostels near UNIBEN?",
-    answer: "Ugbowo axis has the cheapest options — ₦150k-₦300k range. Ekosodin is also good but slightly pricier. Check early before school resumes.",
-    location: "Benin City",
-    upvotes: 62,
-    helpful: true,
-    author: "UNIBEN Student",
-    date: "3 days ago",
-  },
-  {
-    id: "q4",
-    question: "Best areas to live in Abuja on a budget?",
-    answer: "Kubwa, Lugbe, and Karu are affordable with decent infrastructure. Kubwa has the best road network among the three.",
-    location: "Abuja",
-    upvotes: 91,
-    helpful: true,
-    author: "Abuja Resident",
-    date: "5 days ago",
-  },
-  {
-    id: "q5",
-    question: "How is the water situation in Warri?",
-    answer: "Most estates have boreholes. Public water supply is unreliable. Budget ₦200k-₦400k for a borehole installation.",
-    location: "Warri",
-    upvotes: 34,
-    helpful: true,
-    author: "Delta Native",
-    date: "1 week ago",
-  },
-  {
-    id: "q6",
-    question: "Internet providers in Lekki — which is best?",
-    answer: "Spectranet and Tizeti are the most reliable. Spectranet is faster but pricier. Tizeti offers unlimited plans from ₦9,800/month.",
-    location: "Lekki",
-    upvotes: 156,
-    helpful: true,
-    author: "Tech Worker",
-    date: "4 days ago",
+    featured: false,
+    amenities: ["Borehole", "Security", "Parking", "Generator Backup"],
+    description: "Executive 3-bedroom apartment in Awka with modern finishing. Quiet neighborhood ideal for families and professionals.",
+    agent: { name: "Chioma Eze", phone: "+234 808 901 2345", image: "" },
   },
 ];
 
 export const cities = ["Lagos", "Abuja", "Benin City", "Port Harcourt", "Delta", "Enugu", "Awka"];
 
-export const serviceCategories = ["Movers", "Electricians", "Plumbers", "Laundry", "Cleaning", "Internet Setup", "Dispatch Riders", "Security"];
+export const propertyTypes = ["Apartment", "Duplex", "Self Contain", "Student Lodge", "Shortlet"];
 
-export const trendingLocations = ["Lekki", "Yaba", "Apapa", "Gwarinpa", "Festac", "Awka", "Benin City", "Asaba", "Warri", "Enugu"];
+export const testimonials = [
+  {
+    id: "t1",
+    name: "Aisha Mohammed",
+    location: "Abuja",
+    text: "Elomaze helped me find a verified 3-bedroom in Gwarinpa within a week. The agent was professional and the listing was exactly as described.",
+    rating: 5,
+  },
+  {
+    id: "t2",
+    name: "Emeka Obi",
+    location: "Lagos",
+    text: "As a student, finding affordable accommodation in Lagos was stressful until I found Elomaze. Got a great mini flat in Yaba at a fair price.",
+    rating: 5,
+  },
+  {
+    id: "t3",
+    name: "Blessing Adekunle",
+    location: "Port Harcourt",
+    text: "The verified badge gave me so much confidence. I knew the property was real before I even visited. Highly recommend Elomaze!",
+    rating: 5,
+  },
+];
+
+export const demoMessages = [
+  {
+    id: "m1",
+    agentName: "Chidi Okafor",
+    propertyTitle: "Luxury 3-Bedroom Apartment",
+    messages: [
+      { sender: "user" as const, text: "Is this apartment still available?", time: "2:30 PM" },
+      { sender: "agent" as const, text: "Yes it is! Would you like to schedule a visit?", time: "2:32 PM" },
+      { sender: "user" as const, text: "Yes please. Is tomorrow afternoon good?", time: "2:33 PM" },
+      { sender: "agent" as const, text: "Perfect. Let's do 3pm tomorrow. I'll send you the exact address.", time: "2:35 PM" },
+    ],
+  },
+  {
+    id: "m2",
+    agentName: "Amina Bello",
+    propertyTitle: "5-Bedroom Detached Duplex",
+    messages: [
+      { sender: "user" as const, text: "What's the final price for the duplex?", time: "10:15 AM" },
+      { sender: "agent" as const, text: "The asking price is ₦85M but there's room for negotiation for serious buyers.", time: "10:20 AM" },
+    ],
+  },
+  {
+    id: "m3",
+    agentName: "Efe Okoro",
+    propertyTitle: "Furnished Shortlet Apartment",
+    messages: [
+      { sender: "user" as const, text: "Is this apartment available for next weekend?", time: "9:00 AM" },
+      { sender: "agent" as const, text: "Yes, inspection tomorrow.", time: "9:05 AM" },
+    ],
+  },
+];

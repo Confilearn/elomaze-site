@@ -10,7 +10,7 @@ function NotFoundComponent() {
     <div className="flex min-h-[80vh] items-center justify-center px-4">
       <div className="max-w-md text-center">
         <div className="text-8xl mb-4">🏠</div>
-        <h1 className="text-3xl font-bold text-foreground">Looks like this page moved out</h1>
+        <h1 className="text-3xl font-bold text-foreground">Looks like this property moved out</h1>
         <p className="mt-3 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been relocated.
         </p>
@@ -32,11 +32,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "Elomaze — Trusted Homes, Services & Community in Nigeria" },
-      { name: "description", content: "Find trusted homes, discover local services, and get real community insights across Nigeria." },
+      { title: "Elomaze — Trusted Homes in Nigeria" },
+      { name: "description", content: "Find trusted, verified homes across Nigeria. Browse apartments, duplexes, shortlets, and more." },
       { name: "author", content: "Elomaze" },
-      { property: "og:title", content: "Elomaze — Trusted Homes, Services & Community in Nigeria" },
-      { property: "og:description", content: "Find trusted homes, discover local services, and get real community insights across Nigeria." },
+      { property: "og:title", content: "Elomaze — Trusted Homes in Nigeria" },
+      { property: "og:description", content: "Find trusted, verified homes across Nigeria." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#153351" },
