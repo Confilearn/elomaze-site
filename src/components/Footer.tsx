@@ -8,9 +8,11 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-primary-foreground rounded-lg flex items-center justify-center">
-                <span className="text-foreground font-bold text-sm">E</span>
+                <svg viewBox="0 0 24 24" fill="none" className="w-4.5 h-4.5">
+                  <path d="M12 3L3 10h2v10h5v-5h4v5h5V10h2L12 3z" fill="oklch(0.30 0.06 250)" />
+                </svg>
               </div>
-              <span className="text-xl font-bold tracking-tight">Elomaze</span>
+              <span className="text-xl font-bold tracking-tight">lomaze</span>
             </div>
             <p className="text-sm opacity-60 leading-relaxed">
               Trusted homes across Nigeria. Find verified properties with confidence.
