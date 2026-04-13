@@ -3,6 +3,8 @@ export interface Property {
   title: string;
   location: string;
   city: string;
+  state: string;
+  lga: string;
   price: number;
   priceLabel: string;
   beds: number;
@@ -11,151 +13,18 @@ export interface Property {
   image: string;
   verified: boolean;
   featured: boolean;
+  furnished: boolean;
+  sqm: number;
+  parking: number;
   amenities: string[];
   description: string;
   agent: { name: string; phone: string; image: string };
 }
 
-export const properties: Property[] = [
-  {
-    id: "1",
-    title: "Luxury 3-Bedroom Apartment",
-    location: "Lekki Phase 1, Lagos",
-    city: "Lagos",
-    price: 4500000,
-    priceLabel: "₦4,500,000/yr",
-    beds: 3,
-    baths: 3,
-    type: "Apartment",
-    image: "property-1",
-    verified: true,
-    featured: true,
-    amenities: ["Borehole", "24/7 Security", "Parking", "Generator Backup", "Prepaid Meter", "Swimming Pool"],
-    description: "Exquisite 3-bedroom apartment in the heart of Lekki Phase 1. Features modern finishes, spacious living areas, and stunning city views. Fully serviced estate with 24/7 security, swimming pool, and gym access.",
-    agent: { name: "Chidi Okafor", phone: "+234 801 234 5678", image: "" },
-  },
-  {
-    id: "2",
-    title: "5-Bedroom Detached Duplex",
-    location: "Gwarinpa, Abuja",
-    city: "Abuja",
-    price: 85000000,
-    priceLabel: "₦85,000,000",
-    beds: 5,
-    baths: 5,
-    type: "Duplex",
-    image: "property-2",
-    verified: true,
-    featured: true,
-    amenities: ["Borehole", "Security", "Parking", "Generator Backup", "Boys Quarter"],
-    description: "Massive 5-bedroom fully detached duplex in Gwarinpa estate. Well-maintained compound with beautiful garden, security fence, and spacious rooms. Perfect for families.",
-    agent: { name: "Amina Bello", phone: "+234 802 345 6789", image: "" },
-  },
-  {
-    id: "3",
-    title: "Student Hostel near UNIBEN",
-    location: "Ugbowo, Benin City",
-    city: "Benin City",
-    price: 250000,
-    priceLabel: "₦250,000/yr",
-    beds: 1,
-    baths: 1,
-    type: "Student Lodge",
-    image: "property-3",
-    verified: true,
-    featured: false,
-    amenities: ["Borehole", "Security", "Prepaid Meter"],
-    description: "Clean and affordable student accommodation near the University of Benin. Ugbowo axis with easy access to campus. Includes wardrobe and study space.",
-    agent: { name: "Osaze Omoruyi", phone: "+234 803 456 7890", image: "" },
-  },
-  {
-    id: "4",
-    title: "Furnished Shortlet Apartment",
-    location: "Asaba, Delta",
-    city: "Delta",
-    price: 35000,
-    priceLabel: "₦35,000/night",
-    beds: 2,
-    baths: 2,
-    type: "Shortlet",
-    image: "property-4",
-    verified: true,
-    featured: true,
-    amenities: ["AC", "WiFi", "Generator Backup", "Parking", "Smart TV"],
-    description: "Beautifully furnished shortlet apartment in Asaba. Fully air-conditioned with smart TV, reliable WiFi, and backup generator. Perfect for business travelers.",
-    agent: { name: "Efe Okoro", phone: "+234 804 567 8901", image: "" },
-  },
-  {
-    id: "5",
-    title: "Modern Mini Flat",
-    location: "Yaba, Lagos",
-    city: "Lagos",
-    price: 1200000,
-    priceLabel: "₦1,200,000/yr",
-    beds: 1,
-    baths: 1,
-    type: "Self Contain",
-    image: "property-5",
-    verified: true,
-    featured: false,
-    amenities: ["Prepaid Meter", "Security", "Parking"],
-    description: "Contemporary mini flat in the heart of Yaba. Perfect for young professionals. Close to tech hubs, restaurants, and public transport.",
-    agent: { name: "Tunde Adeyemi", phone: "+234 805 678 9012", image: "" },
-  },
-  {
-    id: "6",
-    title: "4-Bedroom Detached House",
-    location: "GRA, Port Harcourt",
-    city: "Port Harcourt",
-    price: 65000000,
-    priceLabel: "₦65,000,000",
-    beds: 4,
-    baths: 4,
-    type: "Duplex",
-    image: "property-6",
-    verified: true,
-    featured: true,
-    amenities: ["Borehole", "Security", "Parking", "Generator Backup", "Garden"],
-    description: "Premium 4-bedroom detached house in the exclusive GRA area of Port Harcourt. Large compound, beautiful garden, and top-notch security.",
-    agent: { name: "Ngozi Ibe", phone: "+234 806 789 0123", image: "" },
-  },
-  {
-    id: "7",
-    title: "2-Bedroom Flat in Enugu",
-    location: "Independence Layout, Enugu",
-    city: "Enugu",
-    price: 800000,
-    priceLabel: "₦800,000/yr",
-    beds: 2,
-    baths: 2,
-    type: "Apartment",
-    image: "property-1",
-    verified: true,
-    featured: false,
-    amenities: ["Borehole", "Security", "Parking", "Prepaid Meter"],
-    description: "Spacious 2-bedroom flat in the serene Independence Layout. Close to major amenities, schools, and markets.",
-    agent: { name: "Emeka Nwosu", phone: "+234 807 890 1234", image: "" },
-  },
-  {
-    id: "8",
-    title: "Executive 3-Bed Apartment",
-    location: "Awka, Anambra",
-    city: "Awka",
-    price: 1500000,
-    priceLabel: "₦1,500,000/yr",
-    beds: 3,
-    baths: 2,
-    type: "Apartment",
-    image: "property-2",
-    verified: true,
-    featured: false,
-    amenities: ["Borehole", "Security", "Parking", "Generator Backup"],
-    description: "Executive 3-bedroom apartment in Awka with modern finishing. Quiet neighborhood ideal for families and professionals.",
-    agent: { name: "Chioma Eze", phone: "+234 808 901 2345", image: "" },
-  },
-];
+// Re-export all properties from the dedicated file
+export { allProperties as properties } from "./properties-data";
 
-export const cities = ["Lagos", "Abuja", "Benin City", "Port Harcourt", "Delta", "Enugu", "Awka"];
+export const cities = ["Lagos", "Abuja", "Benin City", "Port Harcourt", "Asaba", "Warri", "Enugu", "Awka", "Onitsha", "Ibadan", "Owerri", "Uyo", "Calabar", "Kaduna", "Kano"];
 
 export const propertyTypes = ["Apartment", "Duplex", "Self Contain", "Student Lodge", "Shortlet"];
 
