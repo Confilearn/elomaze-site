@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin/settings")({
   component: AdminSettingsPage,
@@ -15,6 +16,10 @@ function AdminSettingsPage() {
     newUsers: false,
     agentRequests: true,
   });
+
+  const handleSave = () => {
+    toast.success("Settings saved successfully!");
+  };
 
   return (
     <div className="space-y-8 max-w-2xl">
@@ -34,31 +39,6 @@ function AdminSettingsPage() {
           <div>
             <label className="text-sm font-medium text-foreground mb-1.5 block">Contact Email</label>
             <input value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} className="w-full h-10 px-3 rounded-xl bg-secondary border-0 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
-          </div>
-        </div>
-      </div>
-
-      {/* Branding */}
-      <div className="bg-card rounded-2xl border border-border/50 p-6 premium-shadow">
-        <h3 className="text-base font-semibold text-foreground mb-4">Branding</h3>
-        <div className="space-y-4">
-          <div>
-            <label className="text-sm font-medium text-foreground mb-1.5 block">Logo</label>
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center">
-                <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
-                  <path d="M12 3L3 10h2v10h5v-5h4v5h5V10h2L12 3z" fill="white" />
-                </svg>
-              </div>
-              <Button variant="outline" size="sm">Upload New Logo</Button>
-            </div>
-          </div>
-          <div>
-            <label className="text-sm font-medium text-foreground mb-1.5 block">Primary Color</label>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary" />
-              <span className="text-sm text-muted-foreground">rgb(21, 51, 81)</span>
-            </div>
           </div>
         </div>
       </div>
@@ -89,7 +69,7 @@ function AdminSettingsPage() {
         </div>
       </div>
 
-      <Button variant="premium" size="lg">Save Changes</Button>
+      <Button variant="premium" size="lg" onClick={handleSave}>Save Changes</Button>
     </div>
   );
 }

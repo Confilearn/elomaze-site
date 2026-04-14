@@ -1,10 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Search, ArrowRight, Shield, BadgeCheck, Sparkles, MapPin, Star, Building2, Home as HomeIcon, Hotel, GraduationCap, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PropertyCard } from "@/components/PropertyCard";
 import { properties, cities, propertyTypes, testimonials } from "@/lib/data";
 import { Link } from "@tanstack/react-router";
 import heroImage from "@/assets/hero-lagos.jpg";
+import { useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,7 +28,22 @@ const typeIcons: Record<string, React.ReactNode> = {
 };
 
 function Index() {
-  const featuredProperties = properties.filter((p) => p.featured);
+  const featuredProperties = properties.filter((p) => p.featured).slice(0, 8);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate({ to: "/properties", search: { q: searchQuery.trim() } });
+    } else {
+      navigate({ to: "/properties" });
+    }
+  };
+
+  const handlePopularClick = (city: string) => {
+    navigate({ to: "/properties", search: { q: city } });
+  };
 
   return (
     <div>
@@ -48,29 +64,31 @@ function Index() {
               Find verified homes and apartments across Nigeria. Your next home is one search away.
             </p>
 
-            <div className="mt-8 animate-fade-up stagger-2">
+            <form onSubmit={handleSearch} className="mt-8 animate-fade-up stagger-2">
               <div className="flex items-center bg-background rounded-full p-1.5 premium-shadow-lg max-w-xl">
                 <div className="flex items-center flex-1 px-4">
                   <Search className="w-5 h-5 text-muted-foreground shrink-0" />
                   <input
                     type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search city, area, or property..."
                     className="flex-1 ml-3 text-sm text-foreground placeholder:text-muted-foreground bg-transparent border-0 outline-none"
                   />
                 </div>
-                <Button variant="premium" size="lg" className="shrink-0">
+                <Button type="submit" variant="premium" size="lg" className="shrink-0">
                   Search
                 </Button>
               </div>
               <div className="flex items-center gap-2 mt-3 flex-wrap">
                 <span className="text-xs text-background/50">Popular:</span>
                 {["Lekki", "Yaba", "Gwarinpa", "Benin", "Asaba"].map((city) => (
-                  <span key={city} className="text-xs text-background/70 bg-background/10 px-2.5 py-1 rounded-full hover:bg-background/20 cursor-pointer transition-colors">
+                  <button type="button" key={city} onClick={() => handlePopularClick(city)} className="text-xs text-background/70 bg-background/10 px-2.5 py-1 rounded-full hover:bg-background/20 cursor-pointer transition-colors">
                     {city}
-                  </span>
+                  </button>
                 ))}
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </section>
@@ -93,9 +111,9 @@ function Index() {
             </div>
           ))}
         </div>
-        <div className="sm:hidden mt-6 text-center">
-          <Button variant="outline" asChild>
-            <Link to="/properties">View all properties</Link>
+        <div className="mt-8 text-center">
+          <Button variant="outline" size="lg" asChild>
+            <Link to="/properties">View More Properties</Link>
           </Button>
         </div>
       </section>
@@ -108,10 +126,11 @@ function Index() {
             <p className="mt-2 text-sm text-muted-foreground">Explore properties in Nigeria's top cities</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
-            {cities.map((city, i) => (
+            {cities.slice(0, 7).map((city, i) => (
               <Link
                 key={city}
                 to="/properties"
+                search={{ q: city }}
                 className={`group relative flex flex-col items-center justify-center p-6 rounded-2xl bg-card border border-border/50 card-hover premium-shadow text-center animate-fade-up stagger-${i + 1}`}
               >
                 <MapPin className="w-6 h-6 text-primary mb-2" />
@@ -157,6 +176,7 @@ function Index() {
               <Link
                 key={type}
                 to="/properties"
+                search={{ q: type }}
                 className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-card border border-border/50 card-hover premium-shadow text-center"
               >
                 <div className="text-primary mb-3">
