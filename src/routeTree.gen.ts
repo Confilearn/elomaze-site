@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SavedRouteImport } from './routes/saved'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as ProfileRouteImport } from './routes/profile'
@@ -19,11 +20,19 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AgentDashboardRouteImport } from './routes/agent-dashboard'
+import { Route as AgentRouteImport } from './routes/agent'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as PropertiesPropertyIdRouteImport } from './routes/properties.$propertyId'
+import { Route as AgentSettingsRouteImport } from './routes/agent/settings'
+import { Route as AgentRegisterRouteImport } from './routes/agent/register'
+import { Route as AgentMessagesRouteImport } from './routes/agent/messages'
+import { Route as AgentLoginRouteImport } from './routes/agent/login'
+import { Route as AgentListingsRouteImport } from './routes/agent/listings'
+import { Route as AgentDashboardRouteImport } from './routes/agent/dashboard'
+import { Route as AgentAddPropertyRouteImport } from './routes/agent/add-property'
 import { Route as AdminVerificationsRouteImport } from './routes/admin/verifications'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
@@ -36,6 +45,11 @@ import { Route as AdminAnalyticsRouteImport } from './routes/admin/analytics'
 const SavedRoute = SavedRouteImport.update({
   id: '/saved',
   path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterRoute = RegisterRouteImport.update({
@@ -83,6 +97,11 @@ const AgentDashboardRoute = AgentDashboardRouteImport.update({
   path: '/agent-dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgentRoute = AgentRouteImport.update({
+  id: '/agent',
+  path: '/agent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -107,6 +126,41 @@ const PropertiesPropertyIdRoute = PropertiesPropertyIdRouteImport.update({
   id: '/$propertyId',
   path: '/$propertyId',
   getParentRoute: () => PropertiesRoute,
+} as any)
+const AgentSettingsRoute = AgentSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AgentRoute,
+} as any)
+const AgentRegisterRoute = AgentRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => AgentRoute,
+} as any)
+const AgentMessagesRoute = AgentMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => AgentRoute,
+} as any)
+const AgentLoginRoute = AgentLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AgentRoute,
+} as any)
+const AgentListingsRoute = AgentListingsRouteImport.update({
+  id: '/listings',
+  path: '/listings',
+  getParentRoute: () => AgentRoute,
+} as any)
+const AgentDashboardRoute = AgentDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AgentRoute,
+} as any)
+const AgentAddPropertyRoute = AgentAddPropertyRouteImport.update({
+  id: '/add-property',
+  path: '/add-property',
+  getParentRoute: () => AgentRoute,
 } as any)
 const AdminVerificationsRoute = AdminVerificationsRouteImport.update({
   id: '/verifications',
@@ -153,6 +207,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
+  '/agent': typeof AgentRouteWithChildren
   '/agent-dashboard': typeof AgentDashboardRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
@@ -162,6 +217,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/saved': typeof SavedRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/listings': typeof AdminListingsRoute
@@ -171,12 +227,20 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/verifications': typeof AdminVerificationsRoute
+  '/agent/add-property': typeof AgentAddPropertyRoute
+  '/agent/dashboard': typeof AgentDashboardRoute
+  '/agent/listings': typeof AgentListingsRoute
+  '/agent/login': typeof AgentLoginRoute
+  '/agent/messages': typeof AgentMessagesRoute
+  '/agent/register': typeof AgentRegisterRoute
+  '/agent/settings': typeof AgentSettingsRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/agent': typeof AgentRouteWithChildren
   '/agent-dashboard': typeof AgentDashboardRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
@@ -186,6 +250,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/saved': typeof SavedRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/listings': typeof AdminListingsRoute
@@ -195,6 +260,13 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/verifications': typeof AdminVerificationsRoute
+  '/agent/add-property': typeof AgentAddPropertyRoute
+  '/agent/dashboard': typeof AgentDashboardRoute
+  '/agent/listings': typeof AgentListingsRoute
+  '/agent/login': typeof AgentLoginRoute
+  '/agent/messages': typeof AgentMessagesRoute
+  '/agent/register': typeof AgentRegisterRoute
+  '/agent/settings': typeof AgentSettingsRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -203,6 +275,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
+  '/agent': typeof AgentRouteWithChildren
   '/agent-dashboard': typeof AgentDashboardRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
@@ -212,6 +285,7 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/saved': typeof SavedRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/listings': typeof AdminListingsRoute
@@ -221,6 +295,13 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/verifications': typeof AdminVerificationsRoute
+  '/agent/add-property': typeof AgentAddPropertyRoute
+  '/agent/dashboard': typeof AgentDashboardRoute
+  '/agent/listings': typeof AgentListingsRoute
+  '/agent/login': typeof AgentLoginRoute
+  '/agent/messages': typeof AgentMessagesRoute
+  '/agent/register': typeof AgentRegisterRoute
+  '/agent/settings': typeof AgentSettingsRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -230,6 +311,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/agent'
     | '/agent-dashboard'
     | '/contact'
     | '/forgot-password'
@@ -239,6 +321,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/properties'
     | '/register'
+    | '/reset-password'
     | '/saved'
     | '/admin/analytics'
     | '/admin/listings'
@@ -248,12 +331,20 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/admin/verifications'
+    | '/agent/add-property'
+    | '/agent/dashboard'
+    | '/agent/listings'
+    | '/agent/login'
+    | '/agent/messages'
+    | '/agent/register'
+    | '/agent/settings'
     | '/properties/$propertyId'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/agent'
     | '/agent-dashboard'
     | '/contact'
     | '/forgot-password'
@@ -263,6 +354,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/properties'
     | '/register'
+    | '/reset-password'
     | '/saved'
     | '/admin/analytics'
     | '/admin/listings'
@@ -272,6 +364,13 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/admin/verifications'
+    | '/agent/add-property'
+    | '/agent/dashboard'
+    | '/agent/listings'
+    | '/agent/login'
+    | '/agent/messages'
+    | '/agent/register'
+    | '/agent/settings'
     | '/properties/$propertyId'
     | '/admin'
   id:
@@ -279,6 +378,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/agent'
     | '/agent-dashboard'
     | '/contact'
     | '/forgot-password'
@@ -288,6 +388,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/properties'
     | '/register'
+    | '/reset-password'
     | '/saved'
     | '/admin/analytics'
     | '/admin/listings'
@@ -297,6 +398,13 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/admin/verifications'
+    | '/agent/add-property'
+    | '/agent/dashboard'
+    | '/agent/listings'
+    | '/agent/login'
+    | '/agent/messages'
+    | '/agent/register'
+    | '/agent/settings'
     | '/properties/$propertyId'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -305,6 +413,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRouteWithChildren
+  AgentRoute: typeof AgentRouteWithChildren
   AgentDashboardRoute: typeof AgentDashboardRoute
   ContactRoute: typeof ContactRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
@@ -314,6 +423,7 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   PropertiesRoute: typeof PropertiesRouteWithChildren
   RegisterRoute: typeof RegisterRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SavedRoute: typeof SavedRoute
 }
 
@@ -324,6 +434,13 @@ declare module '@tanstack/react-router' {
       path: '/saved'
       fullPath: '/saved'
       preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register': {
@@ -389,6 +506,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgentDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agent': {
+      id: '/agent'
+      path: '/agent'
+      fullPath: '/agent'
+      preLoaderRoute: typeof AgentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -423,6 +547,55 @@ declare module '@tanstack/react-router' {
       fullPath: '/properties/$propertyId'
       preLoaderRoute: typeof PropertiesPropertyIdRouteImport
       parentRoute: typeof PropertiesRoute
+    }
+    '/agent/settings': {
+      id: '/agent/settings'
+      path: '/settings'
+      fullPath: '/agent/settings'
+      preLoaderRoute: typeof AgentSettingsRouteImport
+      parentRoute: typeof AgentRoute
+    }
+    '/agent/register': {
+      id: '/agent/register'
+      path: '/register'
+      fullPath: '/agent/register'
+      preLoaderRoute: typeof AgentRegisterRouteImport
+      parentRoute: typeof AgentRoute
+    }
+    '/agent/messages': {
+      id: '/agent/messages'
+      path: '/messages'
+      fullPath: '/agent/messages'
+      preLoaderRoute: typeof AgentMessagesRouteImport
+      parentRoute: typeof AgentRoute
+    }
+    '/agent/login': {
+      id: '/agent/login'
+      path: '/login'
+      fullPath: '/agent/login'
+      preLoaderRoute: typeof AgentLoginRouteImport
+      parentRoute: typeof AgentRoute
+    }
+    '/agent/listings': {
+      id: '/agent/listings'
+      path: '/listings'
+      fullPath: '/agent/listings'
+      preLoaderRoute: typeof AgentListingsRouteImport
+      parentRoute: typeof AgentRoute
+    }
+    '/agent/dashboard': {
+      id: '/agent/dashboard'
+      path: '/dashboard'
+      fullPath: '/agent/dashboard'
+      preLoaderRoute: typeof AgentDashboardRouteImport
+      parentRoute: typeof AgentRoute
+    }
+    '/agent/add-property': {
+      id: '/agent/add-property'
+      path: '/add-property'
+      fullPath: '/agent/add-property'
+      preLoaderRoute: typeof AgentAddPropertyRouteImport
+      parentRoute: typeof AgentRoute
     }
     '/admin/verifications': {
       id: '/admin/verifications'
@@ -509,6 +682,28 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface AgentRouteChildren {
+  AgentAddPropertyRoute: typeof AgentAddPropertyRoute
+  AgentDashboardRoute: typeof AgentDashboardRoute
+  AgentListingsRoute: typeof AgentListingsRoute
+  AgentLoginRoute: typeof AgentLoginRoute
+  AgentMessagesRoute: typeof AgentMessagesRoute
+  AgentRegisterRoute: typeof AgentRegisterRoute
+  AgentSettingsRoute: typeof AgentSettingsRoute
+}
+
+const AgentRouteChildren: AgentRouteChildren = {
+  AgentAddPropertyRoute: AgentAddPropertyRoute,
+  AgentDashboardRoute: AgentDashboardRoute,
+  AgentListingsRoute: AgentListingsRoute,
+  AgentLoginRoute: AgentLoginRoute,
+  AgentMessagesRoute: AgentMessagesRoute,
+  AgentRegisterRoute: AgentRegisterRoute,
+  AgentSettingsRoute: AgentSettingsRoute,
+}
+
+const AgentRouteWithChildren = AgentRoute._addFileChildren(AgentRouteChildren)
+
 interface PropertiesRouteChildren {
   PropertiesPropertyIdRoute: typeof PropertiesPropertyIdRoute
 }
@@ -525,6 +720,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRouteWithChildren,
+  AgentRoute: AgentRouteWithChildren,
   AgentDashboardRoute: AgentDashboardRoute,
   ContactRoute: ContactRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
@@ -534,6 +730,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   PropertiesRoute: PropertiesRouteWithChildren,
   RegisterRoute: RegisterRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SavedRoute: SavedRoute,
 }
 export const routeTree = rootRouteImport
