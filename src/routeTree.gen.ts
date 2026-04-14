@@ -19,7 +19,6 @@ import { Route as MessagesRouteImport } from './routes/messages'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as AgentDashboardRouteImport } from './routes/agent-dashboard'
 import { Route as AgentRouteImport } from './routes/agent'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
@@ -90,11 +89,6 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AgentDashboardRoute = AgentDashboardRouteImport.update({
-  id: '/agent-dashboard',
-  path: '/agent-dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AgentRoute = AgentRouteImport.update({
@@ -208,7 +202,6 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
   '/agent': typeof AgentRouteWithChildren
-  '/agent-dashboard': typeof AgentDashboardRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -241,7 +234,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/agent': typeof AgentRouteWithChildren
-  '/agent-dashboard': typeof AgentDashboardRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -276,7 +268,6 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
   '/agent': typeof AgentRouteWithChildren
-  '/agent-dashboard': typeof AgentDashboardRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -312,7 +303,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/agent'
-    | '/agent-dashboard'
     | '/contact'
     | '/forgot-password'
     | '/login'
@@ -345,7 +335,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/agent'
-    | '/agent-dashboard'
     | '/contact'
     | '/forgot-password'
     | '/login'
@@ -379,7 +368,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/agent'
-    | '/agent-dashboard'
     | '/contact'
     | '/forgot-password'
     | '/login'
@@ -414,7 +402,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRouteWithChildren
   AgentRoute: typeof AgentRouteWithChildren
-  AgentDashboardRoute: typeof AgentDashboardRoute
   ContactRoute: typeof ContactRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
@@ -497,13 +484,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/agent-dashboard': {
-      id: '/agent-dashboard'
-      path: '/agent-dashboard'
-      fullPath: '/agent-dashboard'
-      preLoaderRoute: typeof AgentDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/agent': {
@@ -721,7 +701,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AdminRoute: AdminRouteWithChildren,
   AgentRoute: AgentRouteWithChildren,
-  AgentDashboardRoute: AgentDashboardRoute,
   ContactRoute: ContactRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
