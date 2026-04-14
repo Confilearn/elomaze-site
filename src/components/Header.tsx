@@ -1,10 +1,22 @@
-import { Link } from "@tanstack/react-router";
-import { Search, Menu, X } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { Search, Menu, X, Heart, MessageCircle, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate({ to: "/properties", search: { q: searchQuery.trim() } });
+    } else {
+      navigate({ to: "/properties" });
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
@@ -21,26 +33,31 @@ export function Header() {
             </span>
           </Link>
 
-          <div className="hidden lg:flex items-center flex-1 max-w-md mx-8">
+          <form onSubmit={handleSearch} className="hidden lg:flex items-center flex-1 max-w-md mx-8">
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search city, area, or property..."
                 className="w-full h-10 pl-10 pr-4 rounded-full bg-secondary border-0 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-shadow"
               />
             </div>
-          </div>
+          </form>
 
           <nav className="hidden lg:flex items-center gap-1">
             <Link to="/properties" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
               Properties
             </Link>
+            <Link to="/saved" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-3 py-2 text-sm font-medium text-foreground" }}>
+              <Heart className="w-4 h-4" />
+            </Link>
+            <Link to="/messages" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-3 py-2 text-sm font-medium text-foreground" }}>
+              <MessageCircle className="w-4 h-4" />
+            </Link>
             <Link to="/about" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
               About
-            </Link>
-            <Link to="/contact" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
-              Contact
             </Link>
             <div className="w-px h-6 bg-border mx-2" />
             <Link to="/login" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
@@ -48,6 +65,10 @@ export function Header() {
             </Link>
             <Button variant="premium" size="sm" asChild>
               <Link to="/register">Sign up</Link>
+            </Button>
+            <div className="w-px h-6 bg-border mx-2" />
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/agent/login">Agent Login</Link>
             </Button>
           </nav>
 
@@ -61,22 +82,29 @@ export function Header() {
 
         {mobileMenuOpen && (
           <div className="lg:hidden pb-4 animate-fade-up">
-            <div className="relative mb-4">
+            <form onSubmit={handleSearch} className="relative mb-4">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search city, area, or property..."
                 className="w-full h-10 pl-10 pr-4 rounded-full bg-secondary border-0 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
-            </div>
+            </form>
             <nav className="flex flex-col gap-1">
               <Link to="/properties" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Properties</Link>
+              <Link to="/saved" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Saved Homes</Link>
+              <Link to="/messages" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Messages</Link>
               <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">About</Link>
               <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Contact</Link>
               <div className="h-px bg-border my-2" />
               <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Log in</Link>
               <Button variant="premium" className="mt-2" asChild>
                 <Link to="/register" onClick={() => setMobileMenuOpen(false)}>Sign up</Link>
+              </Button>
+              <Button variant="outline" className="mt-2" asChild>
+                <Link to="/agent/login" onClick={() => setMobileMenuOpen(false)}>Agent Login</Link>
               </Button>
             </nav>
           </div>

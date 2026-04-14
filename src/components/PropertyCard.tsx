@@ -2,9 +2,23 @@ import { Link } from "@tanstack/react-router";
 import { Heart, MapPin, Bed, Bath, BadgeCheck } from "lucide-react";
 import type { Property } from "@/lib/data";
 import { usePropertyImage } from "@/hooks/use-property-images";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export function PropertyCard({ property }: { property: Property }) {
   const imageSrc = usePropertyImage(property.image);
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSaved(!saved);
+    if (!saved) {
+      toast.success("Property saved", { description: property.title });
+    } else {
+      toast("Property removed from saved");
+    }
+  };
 
   return (
     <Link to="/properties/$propertyId" params={{ propertyId: property.id }} className="block group">
@@ -18,8 +32,11 @@ export function PropertyCard({ property }: { property: Property }) {
             height={600}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <button className="absolute top-3 right-3 w-9 h-9 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-background transition-colors">
-            <Heart className="w-4 h-4 text-foreground" />
+          <button
+            onClick={handleSave}
+            className={`absolute top-3 right-3 w-9 h-9 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors ${saved ? "bg-red-500 hover:bg-red-600" : "bg-background/80 hover:bg-background"}`}
+          >
+            <Heart className={`w-4 h-4 ${saved ? "text-white fill-white" : "text-foreground"}`} />
           </button>
           {property.verified && (
             <div className="absolute top-3 left-3 flex items-center gap-1 bg-success text-success-foreground px-2.5 py-1 rounded-full text-xs font-medium">

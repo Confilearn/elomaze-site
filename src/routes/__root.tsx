@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts, useLocation } from
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MobileNav } from "@/components/MobileNav";
+import { Toaster } from "@/components/ui/sonner";
 
 import appCss from "../styles.css?url";
 
@@ -74,7 +75,12 @@ function RootComponent() {
   const isAdmin = location.pathname.startsWith("/admin");
 
   if (isAdmin) {
-    return <Outlet />;
+    return (
+      <>
+        <Outlet />
+        <Toaster position="top-right" richColors />
+      </>
+    );
   }
 
   return (
@@ -85,6 +91,7 @@ function RootComponent() {
       </main>
       <Footer />
       <MobileNav />
+      <Toaster position="top-right" richColors />
     </>
   );
 }

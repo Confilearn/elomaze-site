@@ -42,7 +42,7 @@ export function Footer() {
             <div className="flex flex-col gap-2.5">
               <Link to="/login" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Log in</Link>
               <Link to="/register" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Sign up</Link>
-              <Link to="/agent-dashboard" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Agent Dashboard</Link>
+              <Link to="/agent/login" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Agent Login</Link>
             </div>
           </div>
         </div>
