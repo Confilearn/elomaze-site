@@ -1,11 +1,16 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "outputDirectory": ".output",
   "framework": "vite",
   "rewrites": [
     {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    ".output/server/index.mjs": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }
