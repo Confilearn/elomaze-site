@@ -2,8 +2,36 @@ import { createFileRoute, Outlet, Link, useLocation } from "@tanstack/react-rout
 import { LayoutDashboard, Users, Building2, AlertTriangle, BadgeCheck, BarChart3, MessageCircle, Settings, LogOut, Menu, X, ChevronLeft } from "lucide-react";
 import { useState } from "react";
 
+function AdminNotFound() {
+  return (
+    <div className="flex-1 flex items-center justify-center min-h-[60vh] px-4">
+      <div className="max-w-md text-center">
+        <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10 text-primary">
+            <path d="M12 3L3 10h2v10h5v-5h4v5h5V10h2L12 3z" fill="currentColor" opacity="0.3" />
+            <path d="M12 3L3 10h2v10h5v-5h4v5h5V10h2L12 3z" stroke="currentColor" strokeWidth="1.5" fill="none" />
+          </svg>
+        </div>
+        <h1 className="text-2xl font-bold text-foreground tracking-tight">Page Not Found</h1>
+        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+          The admin page you're looking for doesn't exist or has been moved.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
+          <Link to="/admin" className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+            Go to Dashboard
+          </Link>
+          <Link to="/admin/listings" className="inline-flex items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary">
+            Manage Listings
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export const Route = createFileRoute("/admin")({
   component: AdminLayout,
+  notFoundComponent: AdminNotFound,
 });
 
 const navItems = [
