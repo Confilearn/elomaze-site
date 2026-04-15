@@ -29,11 +29,14 @@ export function Header() {
               </svg>
             </div>
             <span className="text-xl font-bold text-foreground tracking-tight">
-              <span className="sr-only">E</span>lomaze
+              Elomaze
             </span>
           </Link>
 
-          <form onSubmit={handleSearch} className="hidden lg:flex items-center flex-1 max-w-md mx-8">
+          <form
+            onSubmit={handleSearch}
+            className="hidden lg:flex items-center flex-1 max-w-md mx-8"
+          >
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
@@ -47,20 +50,47 @@ export function Header() {
           </form>
 
           <nav className="hidden lg:flex items-center gap-1">
-            <Link to="/properties" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
+            <Link
+              to="/properties"
+              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              activeProps={{
+                className: "px-4 py-2 text-sm font-medium text-foreground",
+              }}
+            >
               Properties
             </Link>
-            <Link to="/saved" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-3 py-2 text-sm font-medium text-foreground" }}>
+            <Link
+              to="/saved"
+              className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              activeProps={{
+                className: "px-3 py-2 text-sm font-medium text-foreground",
+              }}
+            >
               <Heart className="w-4 h-4" />
             </Link>
-            <Link to="/messages" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-3 py-2 text-sm font-medium text-foreground" }}>
+            <Link
+              to="/messages"
+              className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              activeProps={{
+                className: "px-3 py-2 text-sm font-medium text-foreground",
+              }}
+            >
               <MessageCircle className="w-4 h-4" />
             </Link>
-            <Link to="/about" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
+            <Link
+              to="/about"
+              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              activeProps={{
+                className: "px-4 py-2 text-sm font-medium text-foreground",
+              }}
+            >
               About
             </Link>
             <div className="w-px h-6 bg-border mx-2" />
-            <Link to="/login" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <Link
+              to="/login"
+              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
               Log in
             </Link>
             <Button variant="premium" size="sm" asChild>
@@ -76,7 +106,11 @@ export function Header() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 text-foreground"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
 
@@ -93,18 +127,61 @@ export function Header() {
               />
             </form>
             <nav className="flex flex-col gap-1">
-              <Link to="/properties" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Properties</Link>
-              <Link to="/saved" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Saved Homes</Link>
-              <Link to="/messages" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Messages</Link>
-              <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">About</Link>
-              <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Contact</Link>
+              <Link
+                to="/properties"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors"
+              >
+                Properties
+              </Link>
+              <Link
+                to="/saved"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors"
+              >
+                Saved Homes
+              </Link>
+              <Link
+                to="/messages"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors"
+              >
+                Messages
+              </Link>
+              <Link
+                to="/about"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors"
+              >
+                About
+              </Link>
+              <Link
+                to="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors"
+              >
+                Contact
+              </Link>
               <div className="h-px bg-border my-2" />
-              <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors">Log in</Link>
+              <Link
+                to="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-3 text-sm font-medium text-foreground rounded-xl hover:bg-secondary transition-colors"
+              >
+                Log in
+              </Link>
               <Button variant="premium" className="mt-2" asChild>
-                <Link to="/register" onClick={() => setMobileMenuOpen(false)}>Sign up</Link>
+                <Link to="/register" onClick={() => setMobileMenuOpen(false)}>
+                  Sign up
+                </Link>
               </Button>
               <Button variant="outline" className="mt-2" asChild>
-                <Link to="/agent/login" onClick={() => setMobileMenuOpen(false)}>Agent Login</Link>
+                <Link
+                  to="/agent/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Agent Login
+                </Link>
               </Button>
             </nav>
           </div>

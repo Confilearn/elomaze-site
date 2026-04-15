@@ -9,46 +9,97 @@ export function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-primary-foreground rounded-lg flex items-center justify-center">
                 <svg viewBox="0 0 24 24" fill="none" className="w-4.5 h-4.5">
-                  <path d="M12 3L3 10h2v10h5v-5h4v5h5V10h2L12 3z" fill="oklch(0.30 0.06 250)" />
+                  <path
+                    d="M12 3L3 10h2v10h5v-5h4v5h5V10h2L12 3z"
+                    fill="oklch(0.30 0.06 250)"
+                  />
                 </svg>
               </div>
-              <span className="text-xl font-bold tracking-tight">lomaze</span>
+              <span className="text-xl font-bold tracking-tight">Elomaze</span>
             </div>
             <p className="text-sm opacity-60 leading-relaxed">
-              Trusted homes across Nigeria. Find verified properties with confidence.
+              Trusted homes across Nigeria. Find verified properties with
+              confidence.
             </p>
           </div>
 
           <div>
             <h4 className="font-semibold text-sm mb-4">Explore</h4>
             <div className="flex flex-col gap-2.5">
-              <Link to="/properties" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Properties</Link>
-              <Link to="/saved" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Saved Homes</Link>
-              <Link to="/messages" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Messages</Link>
+              <Link
+                to="/properties"
+                className="text-sm opacity-60 hover:opacity-100 transition-opacity"
+              >
+                Properties
+              </Link>
+              <Link
+                to="/saved"
+                className="text-sm opacity-60 hover:opacity-100 transition-opacity"
+              >
+                Saved Homes
+              </Link>
+              <Link
+                to="/messages"
+                className="text-sm opacity-60 hover:opacity-100 transition-opacity"
+              >
+                Messages
+              </Link>
             </div>
           </div>
 
           <div>
             <h4 className="font-semibold text-sm mb-4">Company</h4>
             <div className="flex flex-col gap-2.5">
-              <Link to="/about" className="text-sm opacity-60 hover:opacity-100 transition-opacity">About</Link>
-              <Link to="/contact" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Contact</Link>
-              <Link to="/privacy" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Privacy Policy</Link>
+              <Link
+                to="/about"
+                className="text-sm opacity-60 hover:opacity-100 transition-opacity"
+              >
+                About
+              </Link>
+              <Link
+                to="/contact"
+                className="text-sm opacity-60 hover:opacity-100 transition-opacity"
+              >
+                Contact
+              </Link>
+              <Link
+                to="/privacy"
+                className="text-sm opacity-60 hover:opacity-100 transition-opacity"
+              >
+                Privacy Policy
+              </Link>
             </div>
           </div>
 
           <div>
             <h4 className="font-semibold text-sm mb-4">Account</h4>
             <div className="flex flex-col gap-2.5">
-              <Link to="/login" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Log in</Link>
-              <Link to="/register" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Sign up</Link>
-              <Link to="/agent/login" className="text-sm opacity-60 hover:opacity-100 transition-opacity">Agent Login</Link>
+              <Link
+                to="/login"
+                className="text-sm opacity-60 hover:opacity-100 transition-opacity"
+              >
+                Log in
+              </Link>
+              <Link
+                to="/register"
+                className="text-sm opacity-60 hover:opacity-100 transition-opacity"
+              >
+                Sign up
+              </Link>
+              <Link
+                to="/agent/login"
+                className="text-sm opacity-60 hover:opacity-100 transition-opacity"
+              >
+                Agent Login
+              </Link>
             </div>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-background/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm opacity-40">© 2026 Elomaze. All rights reserved.</p>
+          <p className="text-sm opacity-40">
+            © 2026 Elomaze. All rights reserved.
+          </p>
           <p className="text-sm opacity-40">Made with ❤️ for Nigeria</p>
         </div>
       </div>
