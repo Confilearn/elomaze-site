@@ -23,6 +23,7 @@ import { Route as AgentRouteImport } from './routes/agent'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PropertiesIndexRouteImport } from './routes/properties.index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as PropertiesPropertyIdRouteImport } from './routes/properties.$propertyId'
 import { Route as AgentSettingsRouteImport } from './routes/agent/settings'
@@ -110,6 +111,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PropertiesIndexRoute = PropertiesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PropertiesRoute,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
@@ -229,6 +235,7 @@ export interface FileRoutesByFullPath {
   '/agent/settings': typeof AgentSettingsRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
   '/admin/': typeof AdminIndexRoute
+  '/properties/': typeof PropertiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -240,7 +247,6 @@ export interface FileRoutesByTo {
   '/messages': typeof MessagesRoute
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
-  '/properties': typeof PropertiesRouteWithChildren
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/saved': typeof SavedRoute
@@ -261,6 +267,7 @@ export interface FileRoutesByTo {
   '/agent/settings': typeof AgentSettingsRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
   '/admin': typeof AdminIndexRoute
+  '/properties': typeof PropertiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -295,6 +302,7 @@ export interface FileRoutesById {
   '/agent/settings': typeof AgentSettingsRoute
   '/properties/$propertyId': typeof PropertiesPropertyIdRoute
   '/admin/': typeof AdminIndexRoute
+  '/properties/': typeof PropertiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -330,6 +338,7 @@ export interface FileRouteTypes {
     | '/agent/settings'
     | '/properties/$propertyId'
     | '/admin/'
+    | '/properties/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -341,7 +350,6 @@ export interface FileRouteTypes {
     | '/messages'
     | '/privacy'
     | '/profile'
-    | '/properties'
     | '/register'
     | '/reset-password'
     | '/saved'
@@ -362,6 +370,7 @@ export interface FileRouteTypes {
     | '/agent/settings'
     | '/properties/$propertyId'
     | '/admin'
+    | '/properties'
   id:
     | '__root__'
     | '/'
@@ -395,6 +404,7 @@ export interface FileRouteTypes {
     | '/agent/settings'
     | '/properties/$propertyId'
     | '/admin/'
+    | '/properties/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -513,6 +523,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/properties/': {
+      id: '/properties/'
+      path: '/'
+      fullPath: '/properties/'
+      preLoaderRoute: typeof PropertiesIndexRouteImport
+      parentRoute: typeof PropertiesRoute
     }
     '/admin/': {
       id: '/admin/'
@@ -686,10 +703,12 @@ const AgentRouteWithChildren = AgentRoute._addFileChildren(AgentRouteChildren)
 
 interface PropertiesRouteChildren {
   PropertiesPropertyIdRoute: typeof PropertiesPropertyIdRoute
+  PropertiesIndexRoute: typeof PropertiesIndexRoute
 }
 
 const PropertiesRouteChildren: PropertiesRouteChildren = {
   PropertiesPropertyIdRoute: PropertiesPropertyIdRoute,
+  PropertiesIndexRoute: PropertiesIndexRoute,
 }
 
 const PropertiesRouteWithChildren = PropertiesRoute._addFileChildren(
