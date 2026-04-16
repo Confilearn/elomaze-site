@@ -1,11 +1,16 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": ".output",
+  "outputDirectory": "dist",
   "framework": "vite",
+  "functions": {
+    "dist/server/server.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "rewrites": [
     {
       "source": "/((?!api/).*)",
-      "destination": "/index.html"
+      "destination": "/api/server.js"
     }
   ]
 }
