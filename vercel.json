@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build && copy dist\\server\\server.js api\\server.js",
   "outputDirectory": "dist/client",
   "functions": {
     "api/server.js": {
@@ -11,6 +11,5 @@
       "source": "/(.*)",
       "destination": "/api/server.js"
     }
-  ],
-  "installCommand": "npm run build && cp dist/server/server.js api/server.js"
+  ]
 }
