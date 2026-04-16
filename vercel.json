@@ -1,6 +1,5 @@
 {
-  "buildCommand": "npm run build && node -e \"require('fs').copyFileSync('dist/server/server.js', 'api/server.js')\"",
-  "outputDirectory": "dist/client",
+  "buildCommand": "npm run build && cp dist/server/server.js api/server.js",
   "functions": {
     "api/server.js": {
       "maxDuration": 30
