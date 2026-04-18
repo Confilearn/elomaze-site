@@ -14,6 +14,7 @@
  */
 
 import React, { useState, useMemo } from "react";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 import { Conversation, MessagesProps } from "@/types/messages";
 import { generateDemoConversations } from "@/lib/messages-data";
 import { ConversationList } from "./messages/ConversationList";
@@ -33,13 +34,18 @@ export const Messages: React.FC<MessagesProps> = ({
   onConversationSelect: propOnConversationSelect,
   onSendMessage: propOnSendMessage,
 }) => {
+  const navigate = useNavigate();
+  const search = useSearch({ strict: false }) as Record<
+    string,
+    string | undefined
+  >;
+
   // State management
   const [conversations, setConversations] = useState<Conversation[]>(
     propConversations || generateDemoConversations(),
   );
-  const [selectedConversationId, setSelectedConversationId] = useState<string>(
-    propSelectedConversationId || conversations[0]?.id || "",
-  );
+  const selectedConversationId =
+    search.chat || propSelectedConversationId || "";
   const [searchQuery, setSearchQuery] = useState("");
 
   // Get the currently selected conversation
@@ -61,7 +67,11 @@ export const Messages: React.FC<MessagesProps> = ({
 
   // Handle conversation selection
   const handleConversationSelect = (conversationId: string) => {
-    setSelectedConversationId(conversationId);
+    // Update URL to include chat parameter
+    navigate({
+      to: "/messages",
+      search: { chat: conversationId },
+    });
 
     // Mark messages as read for the selected conversation
     setConversations((prev) =>
@@ -115,9 +125,9 @@ export const Messages: React.FC<MessagesProps> = ({
   };
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-full bg-background overflow-hidden">
       {/* Left Sidebar - Conversation List */}
-      <div className="w-full md:w-96 lg:w-105 border-r border-border">
+      <div className="w-full md:w-96 lg:w-105 border-r border-border shrink-0">
         <ConversationList
           conversations={filteredConversations}
           selectedConversationId={selectedConversationId}
@@ -128,7 +138,7 @@ export const Messages: React.FC<MessagesProps> = ({
       </div>
 
       {/* Right Panel - Chat Window */}
-      <div className="flex-1 hidden md:flex">
+      <div className="flex-1 hidden md:flex min-w-0">
         {selectedConversation ? (
           <ChatWindow
             conversation={selectedConversation}
@@ -136,7 +146,7 @@ export const Messages: React.FC<MessagesProps> = ({
           />
         ) : (
           // Empty state when no conversation is selected
-          <div className="flex flex-1 items-center justify-center">
+          <div className="flex flex-1 items-center justify-center w-full">
             <div className="text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted">
                 <svg
@@ -172,7 +182,7 @@ export const Messages: React.FC<MessagesProps> = ({
           <ChatWindow
             conversation={selectedConversation}
             onSendMessage={handleChatWindowSendMessage}
-            onBack={() => setSelectedConversationId("")}
+            onBack={() => navigate({ to: "/messages", search: {} })}
           />
         </div>
       )}

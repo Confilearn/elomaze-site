@@ -196,8 +196,8 @@ export const MessageInput: React.FC<
         </button>
       </div>
 
-      {/* Helper text */}
-      <div className="flex items-center justify-between text-xs text-muted-foreground px-2">
+      {/* Helper text - Desktop only */}
+      <div className="hidden md:flex items-center justify-between text-xs text-muted-foreground px-2">
         <span>
           Press{" "}
           <kbd className="px-1 py-0.5 bg-muted rounded text-xs">Enter</kbd> to

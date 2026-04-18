@@ -86,9 +86,9 @@ export const ChatWindow: React.FC<
   const { participant, messages } = conversation;
 
   return (
-    <div className="flex h-full flex-col bg-background">
+    <div className="flex h-full w-full flex-col bg-background">
       {/* Chat Header */}
-      <div className="border-b border-border bg-card p-4">
+      <div className="shrink-0 border-b border-border bg-card p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             {/* Mobile back button */}
@@ -130,7 +130,7 @@ export const ChatWindow: React.FC<
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto p-4 min-h-0">
         {isLoading ? (
           // Loading state
           <div className="flex items-center justify-center h-full">
@@ -171,7 +171,7 @@ export const ChatWindow: React.FC<
       </div>
 
       {/* Message Input */}
-      <div className="border-t border-border bg-card p-4">
+      <div className="shrink-0 border-t border-border bg-card p-4">
         <MessageInput
           onSendMessage={onSendMessage}
           placeholder="Type a message..."

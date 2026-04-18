@@ -15,7 +15,7 @@
 
 import React from "react";
 import { Search, CheckCircle } from "lucide-react";
-import { ConversationListProps } from "@/types/messages";
+import { ConversationListProps, Conversation } from "@/types/messages";
 import { formatTimeAgo } from "@/lib/messages-data";
 
 /**
@@ -37,12 +37,12 @@ export const ConversationList: React.FC<ConversationListProps> = ({
   return (
     <div className="flex h-full flex-col bg-card">
       {/* Header */}
-      <div className="border-b border-border p-6">
+      <div className="shrink-0 border-b border-border p-6">
         <h1 className="text-2xl font-bold text-foreground">Messages</h1>
       </div>
 
       {/* Search Bar */}
-      <div className="border-b border-border p-4">
+      <div className="shrink-0 border-b border-border p-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
@@ -56,7 +56,7 @@ export const ConversationList: React.FC<ConversationListProps> = ({
       </div>
 
       {/* Conversations List */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto min-h-0">
         {conversations.length === 0 ? (
           // Empty state when no conversations match search
           <div className="flex flex-col items-center justify-center p-8 text-center">
@@ -139,14 +139,14 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
           </div>
 
           {/* Last message preview */}
-          <div className="mt-1 flex items-center justify-between">
-            <p className="truncate text-sm text-muted-foreground">
+          <div className="mt-1 flex items-center justify-between gap-2">
+            <p className="truncate text-sm text-muted-foreground flex-1 min-w-0">
               {lastMessage.content}
             </p>
 
             {/* Unread count indicator */}
             {unreadCount > 0 && (
-              <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-medium text-primary-foreground">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-destructive text-xs font-medium text-destructive-foreground">
                 {unreadCount}
               </span>
             )}

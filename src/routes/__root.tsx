@@ -27,6 +27,7 @@ import {
   HeadContent,
   Scripts,
   useLocation,
+  useSearch,
 } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -158,7 +159,16 @@ function RootShell({ children }: { children: React.ReactNode }) {
  */
 function RootComponent() {
   const location = useLocation();
+  const search = useSearch({ strict: false }) as Record<
+    string,
+    string | undefined
+  >;
   const isAdmin = location.pathname.startsWith("/admin");
+  const isMessages = location.pathname.startsWith("/messages");
+
+  // Messages route gets full-screen layout without footer
+  // Mobile nav is hidden when a specific conversation is open (URL has chat parameter)
+  const isChatOpen = isMessages && !!search.chat;
 
   // Admin routes get simplified layout
   if (isAdmin) {
@@ -166,6 +176,21 @@ function RootComponent() {
       <>
         {/* Outlet renders the matched child route */}
         <Outlet />
+        <Toaster position="top-right" richColors />
+      </>
+    );
+  }
+
+  if (isMessages) {
+    return (
+      <>
+        <Header />
+        <main
+          className={`h-[calc(100vh-5rem)] lg:h-[calc(100vh-5rem)] ${isChatOpen ? "" : "pb-16"}`}
+        >
+          <Outlet />
+        </main>
+        {!isChatOpen && <MobileNav />}
         <Toaster position="top-right" richColors />
       </>
     );
