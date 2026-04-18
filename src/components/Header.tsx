@@ -1,20 +1,56 @@
+/**
+ * Main application header component with navigation and search
+ *
+ * This component handles:
+ * - Site branding and logo
+ * - Global search functionality with TanStack Router navigation
+ * - Main navigation menu with active state highlighting
+ * - Mobile responsive hamburger menu
+ * - User authentication links
+ *
+ * Key TanStack Start patterns used:
+ * - useNavigate() hook for programmatic navigation
+ * - Link component with activeProps for active route styling
+ * - Search parameters in navigation (search queries)
+ *
+ * For React/Vite developers: This replaces react-router-dom
+ * with better TypeScript support and performance.
+ */
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Search, Menu, X, Heart, MessageCircle, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export function Header() {
+  // Mobile menu state management
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Search query state for the search input
   const [searchQuery, setSearchQuery] = useState("");
+
+  // TanStack Router navigation hook for programmatic navigation
   const navigate = useNavigate();
 
+  /**
+   * Handle search form submission
+   *
+   * Navigates to the properties page with search parameters.
+   * Uses TanStack Router's search parameter system for URL state.
+   *
+   * @param e - Form submission event
+   */
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Navigate to properties page with search query in URL
+    // This creates URLs like /properties?q=lagos
     if (searchQuery.trim()) {
       navigate({ to: "/properties", search: { q: searchQuery.trim() } });
     } else {
       navigate({ to: "/properties" });
     }
+
+    // Close mobile menu after search
     setMobileMenuOpen(false);
   };
 
@@ -22,6 +58,7 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
+          {/* Logo and branding - links to homepage */}
           <Link to="/" className="flex items-center gap-2 shrink-0">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <svg viewBox="0 0 24 24" fill="none" className="w-4.5 h-4.5">
@@ -33,6 +70,7 @@ export function Header() {
             </span>
           </Link>
 
+          {/* Desktop search form - hidden on mobile */}
           <form
             onSubmit={handleSearch}
             className="hidden lg:flex items-center flex-1 max-w-md mx-8"
@@ -49,7 +87,9 @@ export function Header() {
             </div>
           </form>
 
+          {/* Desktop navigation - hidden on mobile */}
           <nav className="hidden lg:flex items-center gap-1">
+            {/* Properties link with active state styling */}
             <Link
               to="/properties"
               className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -59,6 +99,8 @@ export function Header() {
             >
               Properties
             </Link>
+
+            {/* Saved properties with heart icon */}
             <Link
               to="/saved"
               className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -68,6 +110,8 @@ export function Header() {
             >
               <Heart className="w-4 h-4" />
             </Link>
+
+            {/* Messages with message icon */}
             <Link
               to="/messages"
               className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -77,6 +121,8 @@ export function Header() {
             >
               <MessageCircle className="w-4 h-4" />
             </Link>
+
+            {/* About page link */}
             <Link
               to="/about"
               className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -86,7 +132,11 @@ export function Header() {
             >
               About
             </Link>
+
+            {/* Visual separator */}
             <div className="w-px h-6 bg-border mx-2" />
+
+            {/* User authentication links */}
             <Link
               to="/login"
               className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -96,12 +146,15 @@ export function Header() {
             <Button variant="premium" size="sm" asChild>
               <Link to="/register">Sign up</Link>
             </Button>
+
+            {/* Agent portal separator and link */}
             <div className="w-px h-6 bg-border mx-2" />
             <Button variant="outline" size="sm" asChild>
               <Link to="/agent/login">Agent Login</Link>
             </Button>
           </nav>
 
+          {/* Mobile menu toggle button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 text-foreground"
@@ -114,8 +167,10 @@ export function Header() {
           </button>
         </div>
 
+        {/* Mobile navigation menu - shown when hamburger is clicked */}
         {mobileMenuOpen && (
           <div className="lg:hidden pb-4 animate-fade-up">
+            {/* Mobile search form */}
             <form onSubmit={handleSearch} className="relative mb-4">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
@@ -126,6 +181,8 @@ export function Header() {
                 className="w-full h-10 pl-10 pr-4 rounded-full bg-secondary border-0 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
             </form>
+
+            {/* Mobile navigation links */}
             <nav className="flex flex-col gap-1">
               <Link
                 to="/properties"
@@ -162,7 +219,11 @@ export function Header() {
               >
                 Contact
               </Link>
+
+              {/* Mobile menu separator */}
               <div className="h-px bg-border my-2" />
+
+              {/* Mobile authentication links */}
               <Link
                 to="/login"
                 onClick={() => setMobileMenuOpen(false)}

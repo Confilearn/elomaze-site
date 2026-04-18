@@ -1,53 +1,138 @@
+/**
+ * Property detail page - Dynamic route for individual property listings
+ *
+ * This file demonstrates TanStack Start's dynamic routing with parameters:
+ * - Route pattern: /properties/$propertyId
+ * - URL example: /properties/123
+ * - Parameter access: params.propertyId
+ *
+ * Key features:
+ * - Dynamic meta tags based on property data
+ * - Type-safe parameter access
+ * - Custom not found handling for invalid property IDs
+ * - Server-side rendering with property data
+ *
+ * For React/Vite developers: This replaces useParams() and useEffect()
+ * data fetching patterns with built-in, type-safe routing.
+ */
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MapPin, Bed, Bath, BadgeCheck, Phone, ArrowLeft, Heart, Share2, Shield, Zap, Car, Droplets, Gauge, MessageCircle, Maximize, ParkingCircle, Wifi, Wind, Home as HomeIcon, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import {
+  MapPin,
+  Bed,
+  Bath,
+  BadgeCheck,
+  Phone,
+  ArrowLeft,
+  Heart,
+  Share2,
+  Shield,
+  Zap,
+  Car,
+  Droplets,
+  Gauge,
+  MessageCircle,
+  Maximize,
+  ParkingCircle,
+  Wifi,
+  Wind,
+  Home as HomeIcon,
+  ChevronLeft,
+  ChevronRight,
+  Calendar,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { properties } from "@/lib/data";
 import { PropertyCard } from "@/components/PropertyCard";
 import { getPropertyImage } from "@/hooks/use-property-images";
 import { useState } from "react";
 
+/**
+ * Dynamic route configuration for property detail pages
+ *
+ * This route handles:
+ * - Dynamic parameter extraction (propertyId)
+ * - Dynamic meta tags based on property data
+ * - Custom 404 handling for invalid properties
+ * - Server-side data loading
+ */
 export const Route = createFileRoute("/properties/$propertyId")({
+  /**
+   * Dynamic head configuration based on route parameters
+   *
+   * This function receives route parameters and generates
+   * appropriate meta tags for SEO and social sharing.
+   * TanStack Start handles server-side rendering of these tags.
+   *
+   * @param params - Route parameters containing propertyId
+   */
   head: ({ params }) => {
     const property = properties.find((p) => p.id === params.propertyId);
     return {
       meta: [
-        { title: property ? `${property.title} — Elomaze` : "Property — Elomaze" },
-        { name: "description", content: property?.description || "Property details on Elomaze" },
-        { property: "og:title", content: property ? `${property.title} — Elomaze` : "Property — Elomaze" },
-        { property: "og:description", content: property?.description || "Property details on Elomaze" },
+        {
+          title: property
+            ? `${property.title} — Elomaze`
+            : "Property — Elomaze",
+        },
+        {
+          name: "description",
+          content: property?.description || "Property details on Elomaze",
+        },
+        {
+          property: "og:title",
+          content: property
+            ? `${property.title} — Elomaze`
+            : "Property — Elomaze",
+        },
+        {
+          property: "og:description",
+          content: property?.description || "Property details on Elomaze",
+        },
       ],
     };
   },
+
+  // Main component for this route
   component: PropertyDetailsPage,
+
+  // Custom 404 component for invalid property IDs
   notFoundComponent: () => (
     <div className="max-w-7xl mx-auto px-4 py-20 text-center">
       <h1 className="text-2xl font-bold text-foreground">Property not found</h1>
-      <Link to="/properties" className="text-primary mt-4 inline-block">Back to properties</Link>
+      <Link to="/properties" className="text-primary mt-4 inline-block">
+        Back to properties
+      </Link>
     </div>
   ),
 });
 
+/**
+ * Icon mapping for property amenities
+ *
+ * This provides consistent iconography for different amenity types.
+ * In production, this could be moved to a separate utilities file.
+ */
 const amenityIcons: Record<string, React.ReactNode> = {
-  "Borehole": <Droplets className="w-4 h-4" />,
-  "Security": <Shield className="w-4 h-4" />,
+  Borehole: <Droplets className="w-4 h-4" />,
+  Security: <Shield className="w-4 h-4" />,
   "24/7 Security": <Shield className="w-4 h-4" />,
-  "Parking": <Car className="w-4 h-4" />,
+  Parking: <Car className="w-4 h-4" />,
   "Generator Backup": <Zap className="w-4 h-4" />,
   "Prepaid Meter": <Gauge className="w-4 h-4" />,
   "Swimming Pool": <Droplets className="w-4 h-4" />,
-  "AC": <Wind className="w-4 h-4" />,
-  "WiFi": <Wifi className="w-4 h-4" />,
+  AC: <Wind className="w-4 h-4" />,
+  WiFi: <Wifi className="w-4 h-4" />,
   "Smart TV": <HomeIcon className="w-4 h-4" />,
-  "Gym": <HomeIcon className="w-4 h-4" />,
+  Gym: <HomeIcon className="w-4 h-4" />,
   "Fenced Compound": <Shield className="w-4 h-4" />,
   "POP Ceiling": <HomeIcon className="w-4 h-4" />,
   "Boys Quarter": <HomeIcon className="w-4 h-4" />,
-  "Garden": <HomeIcon className="w-4 h-4" />,
-  "CCTV": <Shield className="w-4 h-4" />,
-  "Elevator": <HomeIcon className="w-4 h-4" />,
+  Garden: <HomeIcon className="w-4 h-4" />,
+  CCTV: <Shield className="w-4 h-4" />,
+  Elevator: <HomeIcon className="w-4 h-4" />,
   "Smart Home": <HomeIcon className="w-4 h-4" />,
-  "Balcony": <HomeIcon className="w-4 h-4" />,
-  "Kitchen": <HomeIcon className="w-4 h-4" />,
+  Balcony: <HomeIcon className="w-4 h-4" />,
+  Kitchen: <HomeIcon className="w-4 h-4" />,
 };
 
 function PropertyDetailsPage() {
@@ -60,8 +145,12 @@ function PropertyDetailsPage() {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <div className="text-6xl mb-4">🏠</div>
-        <h1 className="text-2xl font-bold text-foreground">Property not found</h1>
-        <p className="mt-2 text-sm text-muted-foreground">This listing may have been removed or doesn't exist.</p>
+        <h1 className="text-2xl font-bold text-foreground">
+          Property not found
+        </h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          This listing may have been removed or doesn't exist.
+        </p>
         <Button variant="premium" className="mt-6" asChild>
           <Link to="/properties">Browse Properties</Link>
         </Button>
@@ -78,7 +167,11 @@ function PropertyDetailsPage() {
   ];
 
   const relatedProperties = properties
-    .filter((p) => p.id !== property.id && (p.city === property.city || p.type === property.type))
+    .filter(
+      (p) =>
+        p.id !== property.id &&
+        (p.city === property.city || p.type === property.type),
+    )
     .slice(0, 3);
 
   return (
@@ -86,7 +179,10 @@ function PropertyDetailsPage() {
       {/* Top Nav */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/properties" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <Link
+            to="/properties"
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
             <ArrowLeft className="w-4 h-4" /> Back to listings
           </Link>
           <div className="flex items-center gap-2">
@@ -94,7 +190,9 @@ function PropertyDetailsPage() {
               onClick={() => setSaved(!saved)}
               className={`w-9 h-9 rounded-full border flex items-center justify-center transition-colors ${saved ? "bg-primary border-primary" : "border-border hover:bg-secondary"}`}
             >
-              <Heart className={`w-4 h-4 ${saved ? "text-primary-foreground fill-primary-foreground" : ""}`} />
+              <Heart
+                className={`w-4 h-4 ${saved ? "text-primary-foreground fill-primary-foreground" : ""}`}
+              />
             </button>
             <button className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors">
               <Share2 className="w-4 h-4" />
@@ -118,13 +216,21 @@ function PropertyDetailsPage() {
           </div>
           {/* Gallery Nav */}
           <button
-            onClick={() => setCurrentImageIndex((i) => (i > 0 ? i - 1 : galleryImages.length - 1))}
+            onClick={() =>
+              setCurrentImageIndex((i) =>
+                i > 0 ? i - 1 : galleryImages.length - 1,
+              )
+            }
             className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
-            onClick={() => setCurrentImageIndex((i) => (i < galleryImages.length - 1 ? i + 1 : 0))}
+            onClick={() =>
+              setCurrentImageIndex((i) =>
+                i < galleryImages.length - 1 ? i + 1 : 0,
+              )
+            }
             className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
           >
             <ChevronRight className="w-5 h-5" />
@@ -167,59 +273,94 @@ function PropertyDetailsPage() {
                   Verified
                 </div>
               )}
-              <span className="text-xs text-muted-foreground bg-secondary px-2.5 py-1 rounded-full">{property.type}</span>
+              <span className="text-xs text-muted-foreground bg-secondary px-2.5 py-1 rounded-full">
+                {property.type}
+              </span>
               {property.furnished && (
-                <span className="text-xs text-primary bg-primary/10 px-2.5 py-1 rounded-full font-medium">Furnished</span>
+                <span className="text-xs text-primary bg-primary/10 px-2.5 py-1 rounded-full font-medium">
+                  Furnished
+                </span>
               )}
-              <span className="text-xs text-success bg-success/10 px-2.5 py-1 rounded-full font-medium">Available</span>
+              <span className="text-xs text-success bg-success/10 px-2.5 py-1 rounded-full font-medium">
+                Available
+              </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mt-3 tracking-tight">{property.title}</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mt-3 tracking-tight">
+              {property.title}
+            </h1>
 
             <div className="flex items-center gap-1 mt-2">
               <MapPin className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">{property.location}</span>
+              <span className="text-sm text-muted-foreground">
+                {property.location}
+              </span>
             </div>
-            <p className="text-xs text-muted-foreground mt-1">{property.state} · {property.lga} LGA</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {property.state} · {property.lga} LGA
+            </p>
 
             {/* Specs Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 p-4 rounded-2xl bg-secondary/50">
               <div className="text-center">
                 <Bed className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-sm font-semibold text-foreground">{property.beds}</p>
-                <p className="text-xs text-muted-foreground">{property.beds === 1 ? "Bedroom" : "Bedrooms"}</p>
+                <p className="text-sm font-semibold text-foreground">
+                  {property.beds}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {property.beds === 1 ? "Bedroom" : "Bedrooms"}
+                </p>
               </div>
               <div className="text-center">
                 <Bath className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-sm font-semibold text-foreground">{property.baths}</p>
-                <p className="text-xs text-muted-foreground">{property.baths === 1 ? "Bathroom" : "Bathrooms"}</p>
+                <p className="text-sm font-semibold text-foreground">
+                  {property.baths}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {property.baths === 1 ? "Bathroom" : "Bathrooms"}
+                </p>
               </div>
               <div className="text-center">
                 <ParkingCircle className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-sm font-semibold text-foreground">{property.parking}</p>
+                <p className="text-sm font-semibold text-foreground">
+                  {property.parking}
+                </p>
                 <p className="text-xs text-muted-foreground">Parking</p>
               </div>
               <div className="text-center">
                 <Maximize className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-sm font-semibold text-foreground">{property.sqm}</p>
+                <p className="text-sm font-semibold text-foreground">
+                  {property.sqm}
+                </p>
                 <p className="text-xs text-muted-foreground">Sq. Meters</p>
               </div>
             </div>
 
             {/* Description */}
             <div className="mt-8">
-              <h2 className="text-lg font-semibold text-foreground mb-3">Description</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">{property.description}</p>
+              <h2 className="text-lg font-semibold text-foreground mb-3">
+                Description
+              </h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {property.description}
+              </p>
             </div>
 
             {/* Amenities */}
             <div className="mt-8">
-              <h2 className="text-lg font-semibold text-foreground mb-4">Amenities</h2>
+              <h2 className="text-lg font-semibold text-foreground mb-4">
+                Amenities
+              </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {property.amenities.map((amenity) => (
-                  <div key={amenity} className="flex items-center gap-2.5 p-3 rounded-xl bg-secondary/50">
+                  <div
+                    key={amenity}
+                    className="flex items-center gap-2.5 p-3 rounded-xl bg-secondary/50"
+                  >
                     <div className="text-primary">
-                      {amenityIcons[amenity] || <BadgeCheck className="w-4 h-4" />}
+                      {amenityIcons[amenity] || (
+                        <BadgeCheck className="w-4 h-4" />
+                      )}
                     </div>
                     <span className="text-sm text-foreground">{amenity}</span>
                   </div>
@@ -229,12 +370,18 @@ function PropertyDetailsPage() {
 
             {/* Location */}
             <div className="mt-8">
-              <h2 className="text-lg font-semibold text-foreground mb-3">Location</h2>
+              <h2 className="text-lg font-semibold text-foreground mb-3">
+                Location
+              </h2>
               <div className="rounded-2xl bg-secondary h-48 flex items-center justify-center">
                 <div className="text-center">
                   <MapPin className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground">{property.location}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{property.state}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {property.location}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {property.state}
+                  </p>
                 </div>
               </div>
             </div>
@@ -245,7 +392,9 @@ function PropertyDetailsPage() {
             <div className="sticky top-24 space-y-4">
               {/* Price Card */}
               <div className="rounded-2xl border border-border p-6 premium-shadow">
-                <p className="text-2xl font-bold text-primary">{property.priceLabel}</p>
+                <p className="text-2xl font-bold text-primary">
+                  {property.priceLabel}
+                </p>
                 <div className="mt-6 space-y-3">
                   <Button variant="premium" size="lg" className="w-full gap-2">
                     <MessageCircle className="w-4 h-4" />
@@ -255,7 +404,11 @@ function PropertyDetailsPage() {
                     <Phone className="w-4 h-4" />
                     Call Agent
                   </Button>
-                  <Button variant="secondary" size="lg" className="w-full gap-2">
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    className="w-full gap-2"
+                  >
                     <Calendar className="w-4 h-4" />
                     Schedule Inspection
                   </Button>
@@ -264,18 +417,31 @@ function PropertyDetailsPage() {
 
               {/* Agent Card */}
               <div className="rounded-2xl border border-border p-6">
-                <h3 className="text-sm font-semibold text-foreground mb-3">Listed by</h3>
+                <h3 className="text-sm font-semibold text-foreground mb-3">
+                  Listed by
+                </h3>
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="text-sm font-bold text-primary">{property.agent.name.split(" ").map(n => n[0]).join("")}</span>
+                    <span className="text-sm font-bold text-primary">
+                      {property.agent.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </span>
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <p className="text-sm font-medium text-foreground">{property.agent.name}</p>
+                      <p className="text-sm font-medium text-foreground">
+                        {property.agent.name}
+                      </p>
                       <BadgeCheck className="w-3.5 h-3.5 text-success" />
                     </div>
-                    <p className="text-xs text-muted-foreground">{property.agent.phone}</p>
-                    <p className="text-xs text-muted-foreground">Verified Agent</p>
+                    <p className="text-xs text-muted-foreground">
+                      {property.agent.phone}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Verified Agent
+                    </p>
                   </div>
                 </div>
               </div>
@@ -286,7 +452,9 @@ function PropertyDetailsPage() {
         {/* Related Properties */}
         {relatedProperties.length > 0 && (
           <div className="mt-16">
-            <h2 className="text-xl font-bold text-foreground mb-6">Similar Properties</h2>
+            <h2 className="text-xl font-bold text-foreground mb-6">
+              Similar Properties
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {relatedProperties.map((p) => (
                 <PropertyCard key={p.id} property={p} />
@@ -300,13 +468,17 @@ function PropertyDetailsPage() {
       <div className="lg:hidden fixed bottom-16 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-t border-border/50 px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
         <div className="flex items-center gap-2">
           <div className="flex-1 min-w-0">
-            <p className="text-base font-bold text-primary truncate">{property.priceLabel}</p>
+            <p className="text-base font-bold text-primary truncate">
+              {property.priceLabel}
+            </p>
           </div>
           <button
             onClick={() => setSaved(!saved)}
             className={`w-10 h-10 rounded-full border flex items-center justify-center shrink-0 transition-colors ${saved ? "bg-primary border-primary" : "border-border"}`}
           >
-            <Heart className={`w-4 h-4 ${saved ? "text-primary-foreground fill-primary-foreground" : ""}`} />
+            <Heart
+              className={`w-4 h-4 ${saved ? "text-primary-foreground fill-primary-foreground" : ""}`}
+            />
           </button>
           <Button variant="premium" size="sm" className="gap-1.5 shrink-0">
             <MessageCircle className="w-4 h-4" />
