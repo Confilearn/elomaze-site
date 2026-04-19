@@ -166,9 +166,9 @@ function RootComponent() {
   >;
   const isAdmin = location.pathname.startsWith("/admin");
   const isAgent = location.pathname.startsWith("/agent");
+  const isAgentMessages = location.pathname.startsWith("/agent/messages");
   const isMessages =
-    location.pathname.startsWith("/messages") ||
-    location.pathname.startsWith("/agent/messages");
+    location.pathname.startsWith("/messages") || isAgentMessages;
 
   // Messages route gets full-screen layout without footer
   // Mobile nav is hidden when a specific conversation is open (URL has chat parameter)
@@ -187,13 +187,18 @@ function RootComponent() {
 
   // Agent routes get agent-specific mobile navigation
   if (isAgent) {
+    // Check if agent chat is open (URL has chat parameter)
+    const isAgentChatOpen = isAgentMessages && !!search.chat;
+
     return (
       <>
         <Header />
-        <main className="min-h-screen pb-16 lg:pb-0">
+        <main
+          className={`h-[calc(100vh-5rem)] ${isAgentChatOpen ? "" : "pb-16 lg:pb-0"}`}
+        >
           <Outlet />
         </main>
-        <AgentMobileNav />
+        {!isAgentChatOpen && <AgentMobileNav />}
         <Toaster position="top-right" richColors />
       </>
     );
