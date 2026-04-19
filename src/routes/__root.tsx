@@ -32,6 +32,7 @@ import {
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MobileNav } from "@/components/MobileNav";
+import { AgentMobileNav } from "@/components/AgentMobileNav";
 import { Toaster } from "@/components/ui/sonner";
 
 import appCss from "../styles.css?url";
@@ -164,6 +165,7 @@ function RootComponent() {
     string | undefined
   >;
   const isAdmin = location.pathname.startsWith("/admin");
+  const isAgent = location.pathname.startsWith("/agent");
   const isMessages =
     location.pathname.startsWith("/messages") ||
     location.pathname.startsWith("/agent/messages");
@@ -178,6 +180,20 @@ function RootComponent() {
       <>
         {/* Outlet renders the matched child route */}
         <Outlet />
+        <Toaster position="top-right" richColors />
+      </>
+    );
+  }
+
+  // Agent routes get agent-specific mobile navigation
+  if (isAgent) {
+    return (
+      <>
+        <Header />
+        <main className="min-h-screen pb-16 lg:pb-0">
+          <Outlet />
+        </main>
+        <AgentMobileNav />
         <Toaster position="top-right" richColors />
       </>
     );
