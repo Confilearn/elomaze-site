@@ -324,7 +324,7 @@ function PropertyDetailsPage() {
           {/* Main Content */}
           <div className="lg:col-span-3 space-y-6 lg:space-y-8">
             {/* Property Overview */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-secondary/50">
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-secondary/50">
               <div className="text-center">
                 <Bed className="w-5 h-5 sm:w-6 sm:h-6 text-primary mx-auto mb-1 sm:mb-2" />
                 <p className="text-base sm:text-lg font-semibold text-foreground">
