@@ -168,7 +168,9 @@ function RootComponent() {
   const isAgent = location.pathname.startsWith("/agent");
   const isAgentMessages = location.pathname.startsWith("/agent/messages");
   const isMessages =
-    location.pathname.startsWith("/messages") || isAgentMessages;
+    location.pathname.startsWith("/messages") ||
+    location.pathname.startsWith("/agent/messages") ||
+    location.pathname.startsWith("/admin/messages");
 
   // Messages route gets full-screen layout without footer
   // Mobile nav is hidden when a specific conversation is open (URL has chat parameter)

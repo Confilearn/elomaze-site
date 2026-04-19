@@ -1,5 +1,23 @@
-import { createFileRoute, Outlet, Link, useLocation } from "@tanstack/react-router";
-import { LayoutDashboard, Users, Building2, AlertTriangle, BadgeCheck, BarChart3, MessageCircle, Settings, LogOut, Menu, X, ChevronLeft } from "lucide-react";
+import {
+  createFileRoute,
+  Outlet,
+  Link,
+  useLocation,
+} from "@tanstack/react-router";
+import {
+  LayoutDashboard,
+  Users,
+  Building2,
+  AlertTriangle,
+  BadgeCheck,
+  BarChart3,
+  MessageCircle,
+  Settings,
+  LogOut,
+  Menu,
+  X,
+  ChevronLeft,
+} from "lucide-react";
 import { useState } from "react";
 
 function AdminNotFound() {
@@ -7,20 +25,41 @@ function AdminNotFound() {
     <div className="flex-1 flex items-center justify-center min-h-[60vh] px-4">
       <div className="max-w-md text-center">
         <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10 text-primary">
-            <path d="M12 3L3 10h2v10h5v-5h4v5h5V10h2L12 3z" fill="currentColor" opacity="0.3" />
-            <path d="M12 3L3 10h2v10h5v-5h4v5h5V10h2L12 3z" stroke="currentColor" strokeWidth="1.5" fill="none" />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            className="w-10 h-10 text-primary"
+          >
+            <path
+              d="M12 3L3 10h2v10h5v-5h4v5h5V10h2L12 3z"
+              fill="currentColor"
+              opacity="0.3"
+            />
+            <path
+              d="M12 3L3 10h2v10h5v-5h4v5h5V10h2L12 3z"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              fill="none"
+            />
           </svg>
         </div>
-        <h1 className="text-2xl font-bold text-foreground tracking-tight">Page Not Found</h1>
+        <h1 className="text-2xl font-bold text-foreground tracking-tight">
+          Page Not Found
+        </h1>
         <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
           The admin page you're looking for doesn't exist or has been moved.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
-          <Link to="/admin" className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link
+            to="/admin"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
             Go to Dashboard
           </Link>
-          <Link to="/admin/listings" className="inline-flex items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary">
+          <Link
+            to="/admin/listings"
+            className="inline-flex items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+          >
             Manage Listings
           </Link>
         </div>
@@ -54,15 +93,25 @@ function AdminLayout() {
     return <Outlet />;
   }
 
+  // Check if on messages page to hide header for full height
+  const isMessagesPage =
+    location.pathname === "/admin/messages" ||
+    location.pathname.startsWith("/admin/messages?");
+
   return (
     <div className="min-h-screen bg-surface flex">
       {/* Mobile Overlay */}
       {sidebarOpen && (
-        <div className="fixed inset-0 bg-foreground/30 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
+        <div
+          className="fixed inset-0 bg-foreground/30 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed lg:sticky top-0 left-0 z-50 h-screen w-64 bg-card border-r border-border/50 flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}>
+      <aside
+        className={`fixed lg:sticky top-0 left-0 z-50 h-screen w-64 bg-card border-r border-border/50 flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
+      >
         <div className="p-5 flex items-center justify-between border-b border-border/50">
           <Link to="/admin" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
@@ -71,20 +120,28 @@ function AdminLayout() {
               </svg>
             </div>
             <div>
-              <span className="text-base font-bold text-foreground tracking-tight">Elomaze</span>
-              <span className="block text-[10px] text-muted-foreground font-medium -mt-0.5">Admin Panel</span>
+              <span className="text-base font-bold text-foreground tracking-tight">
+                Elomaze
+              </span>
+              <span className="block text-[10px] text-muted-foreground font-medium -mt-0.5">
+                Admin Panel
+              </span>
             </div>
           </Link>
-          <button onClick={() => setSidebarOpen(false)} className="lg:hidden p-1">
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="lg:hidden p-1"
+          >
             <X className="w-5 h-5 text-muted-foreground" />
           </button>
         </div>
 
         <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
           {navItems.map((item) => {
-            const isActive = item.href === "/admin"
-              ? location.pathname === "/admin"
-              : location.pathname.startsWith(item.href);
+            const isActive =
+              item.href === "/admin"
+                ? location.pathname === "/admin"
+                : location.pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}
@@ -115,23 +172,32 @@ function AdminLayout() {
       </aside>
 
       {/* Main */}
-      <div className="flex-1 flex flex-col min-h-screen">
-        {/* Top bar */}
-        <header className="sticky top-0 z-30 bg-card/95 backdrop-blur-md border-b border-border/50 px-4 lg:px-8 h-14 flex items-center gap-4">
-          <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-1.5 rounded-lg hover:bg-secondary">
-            <Menu className="w-5 h-5" />
-          </button>
-          <h1 className="text-sm font-semibold text-foreground capitalize">
-            {location.pathname === "/admin" ? "Overview" : location.pathname.split("/").pop()}
-          </h1>
-          <div className="ml-auto flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-              <span className="text-xs font-bold text-primary">A</span>
+      <div className="flex-1 flex flex-col h-screen">
+        {/* Top bar - Hidden on messages page for full height */}
+        {!isMessagesPage && (
+          <header className="sticky top-0 z-30 bg-card/95 backdrop-blur-md border-b border-border/50 px-4 lg:px-8 h-14 flex items-center gap-4">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="lg:hidden p-1.5 rounded-lg hover:bg-secondary"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+            <h1 className="text-sm font-semibold text-foreground capitalize">
+              {location.pathname === "/admin"
+                ? "Overview"
+                : location.pathname.split("/").pop()}
+            </h1>
+            <div className="ml-auto flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-xs font-bold text-primary">A</span>
+              </div>
             </div>
-          </div>
-        </header>
+          </header>
+        )}
 
-        <main className="flex-1 p-4 lg:p-8">
+        <main
+          className={`flex-1 ${isMessagesPage ? "h-screen" : ""} p-0 lg:p-0 overflow-hidden`}
+        >
           <Outlet />
         </main>
       </div>

@@ -41,10 +41,12 @@ export const Messages: React.FC<MessagesProps> = ({
     string | undefined
   >;
 
-  // Determine the base route for navigation (agent vs user messages)
-  const baseRoute = location.pathname.startsWith("/agent/messages")
-    ? "/agent/messages"
-    : "/messages";
+  // Determine the base route for navigation (admin vs agent vs user messages)
+  const baseRoute = location.pathname.startsWith("/admin/messages")
+    ? "/admin/messages"
+    : location.pathname.startsWith("/agent/messages")
+      ? "/agent/messages"
+      : "/messages";
 
   // State management
   const [conversations, setConversations] = useState<Conversation[]>(
