@@ -14,7 +14,7 @@
  */
 
 import React, { useState, useMemo } from "react";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate, useSearch, useLocation } from "@tanstack/react-router";
 import { Conversation, MessagesProps } from "@/types/messages";
 import { generateDemoConversations } from "@/lib/messages-data";
 import { ConversationList } from "./messages/ConversationList";
@@ -35,10 +35,16 @@ export const Messages: React.FC<MessagesProps> = ({
   onSendMessage: propOnSendMessage,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const search = useSearch({ strict: false }) as Record<
     string,
     string | undefined
   >;
+
+  // Determine the base route for navigation (agent vs user messages)
+  const baseRoute = location.pathname.startsWith("/agent/messages")
+    ? "/agent/messages"
+    : "/messages";
 
   // State management
   const [conversations, setConversations] = useState<Conversation[]>(
@@ -67,9 +73,9 @@ export const Messages: React.FC<MessagesProps> = ({
 
   // Handle conversation selection
   const handleConversationSelect = (conversationId: string) => {
-    // Update URL to include chat parameter
+    // Update URL to include chat parameter with correct base route
     navigate({
-      to: "/messages",
+      to: baseRoute,
       search: { chat: conversationId },
     });
 
@@ -84,6 +90,11 @@ export const Messages: React.FC<MessagesProps> = ({
     if (propOnConversationSelect) {
       propOnConversationSelect(conversationId);
     }
+  };
+
+  // Handle navigation back to conversation list
+  const handleBack = () => {
+    navigate({ to: baseRoute, search: {} });
   };
 
   // Handle sending a new message
@@ -138,7 +149,7 @@ export const Messages: React.FC<MessagesProps> = ({
       </div>
 
       {/* Right Panel - Chat Window */}
-      <div className="flex-1 hidden md:flex min-w-0">
+      <div className="flex-1 hidden md:flex min-w-0 h-full">
         {selectedConversation ? (
           <ChatWindow
             conversation={selectedConversation}
@@ -146,7 +157,7 @@ export const Messages: React.FC<MessagesProps> = ({
           />
         ) : (
           // Empty state when no conversation is selected
-          <div className="flex flex-1 items-center justify-center w-full">
+          <div className="flex flex-1 items-center justify-center w-full h-full">
             <div className="text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted">
                 <svg
@@ -182,7 +193,7 @@ export const Messages: React.FC<MessagesProps> = ({
           <ChatWindow
             conversation={selectedConversation}
             onSendMessage={handleChatWindowSendMessage}
-            onBack={() => navigate({ to: "/messages", search: {} })}
+            onBack={handleBack}
           />
         </div>
       )}
