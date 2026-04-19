@@ -35,7 +35,7 @@ export const ConversationList: React.FC<ConversationListProps> = ({
   onSearchChange,
 }) => {
   return (
-    <div className="flex h-full flex-col bg-card">
+    <div className="flex h-full flex-col bg-card max-w-full overflow-hidden">
       {/* Header */}
       <div className="shrink-0 border-b border-border p-6">
         <h1 className="text-2xl font-bold text-foreground">Messages</h1>
@@ -107,7 +107,7 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
     <div
       onClick={onClick}
       className={`
-        relative cursor-pointer p-4 transition-colors hover:bg-accent/50
+        relative cursor-pointer p-3 sm:p-4 transition-colors hover:bg-accent/50
         ${isSelected ? "bg-accent" : ""}
       `}
     >
@@ -139,8 +139,8 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
           </div>
 
           {/* Last message preview */}
-          <div className="mt-1 flex items-center justify-between gap-2">
-            <p className="truncate text-sm text-muted-foreground flex-1 min-w-0">
+          <div className="mt-0.5 flex items-center justify-between gap-2">
+            <p className="line-clamp-1 text-sm text-muted-foreground flex-1 min-w-0">
               {lastMessage.content}
             </p>
 

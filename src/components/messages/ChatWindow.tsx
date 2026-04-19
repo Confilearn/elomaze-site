@@ -86,7 +86,7 @@ export const ChatWindow: React.FC<
   const { participant, messages } = conversation;
 
   return (
-    <div className="flex h-full w-full flex-col bg-background">
+    <div className="flex h-full w-full max-w-full flex-col bg-background overflow-hidden">
       {/* Chat Header */}
       <div className="shrink-0 border-b border-border bg-card p-4">
         <div className="flex items-center justify-between">
@@ -130,7 +130,7 @@ export const ChatWindow: React.FC<
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 min-h-0">
+      <div className="flex-1 overflow-y-auto p-3 sm:p-4 min-h-0">
         {isLoading ? (
           // Loading state
           <div className="flex items-center justify-center h-full">
@@ -144,7 +144,7 @@ export const ChatWindow: React.FC<
         ) : (
           <>
             {/* Message bubbles */}
-            <div className="space-y-4">
+            <div className="space-y-2">
               {messages.map((message, index) => {
                 const isConsecutive =
                   index > 0 &&

@@ -38,12 +38,12 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
       className={`
         flex 
         ${isFromCurrentUser ? "justify-end" : "justify-start"}
-        ${!isConsecutive ? "mt-4" : "mt-1"}
+        ${!isConsecutive ? "mt-3" : "mt-1"}
       `}
     >
       <div
         className={`
-          max-w-[70%] lg:max-w-[50%]
+          max-w-[85%] xs:max-w-[80%] sm:max-w-[70%] md:max-w-[60%] lg:max-w-[50%] min-w-0
           ${isFromCurrentUser ? "order-2" : "order-1"}
         `}
       >
@@ -61,7 +61,9 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
           aria-label={`Message: ${content}`}
         >
           {/* Message content */}
-          <p className="text-sm leading-relaxed wrap-break-word">{content}</p>
+          <p className="text-sm leading-relaxed wrap-break-word overflow-wrap-anywhere line-clamp-6">
+            {content}
+          </p>
 
           {/* Timestamp and read status (for sent messages) */}
           {showTimestamp && (
@@ -99,8 +101,8 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
         {isConsecutive && (
           <div
             className={`
-            h-1
-            ${isFromCurrentUser ? "mr-8" : "ml-8"}
+            h-0.5
+            ${isFromCurrentUser ? "mr-6" : "ml-6"}
           `}
           />
         )}
