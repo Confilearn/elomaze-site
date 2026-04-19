@@ -176,14 +176,13 @@ function RootComponent() {
   // Mobile nav is hidden when a specific conversation is open (URL has chat parameter)
   const isChatOpen = isMessages && !!search.chat;
 
-  // Admin routes get simplified layout
+  // Admin routes get simplified layout with proper container
   if (isAdmin) {
     return (
-      <>
-        {/* Outlet renders the matched child route */}
+      <div className="min-h-screen bg-background">
         <Outlet />
         <Toaster position="top-right" richColors />
-      </>
+      </div>
     );
   }
 

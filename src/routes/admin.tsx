@@ -94,9 +94,7 @@ function AdminLayout() {
   }
 
   // Check if on messages page to hide header for full height
-  const isMessagesPage =
-    location.pathname === "/admin/messages" ||
-    location.pathname.startsWith("/admin/messages?");
+  const isMessagesPage = location.pathname.startsWith("/admin/messages");
 
   return (
     <div className="min-h-screen bg-surface flex">
@@ -172,7 +170,7 @@ function AdminLayout() {
       </aside>
 
       {/* Main */}
-      <div className="flex-1 flex flex-col h-screen">
+      <div className="flex-1 flex flex-col min-h-screen">
         {/* Top bar - Hidden on messages page for full height */}
         {!isMessagesPage && (
           <header className="sticky top-0 z-30 bg-card/95 backdrop-blur-md border-b border-border/50 px-4 lg:px-8 h-14 flex items-center gap-4">
@@ -195,9 +193,7 @@ function AdminLayout() {
           </header>
         )}
 
-        <main
-          className={`flex-1 ${isMessagesPage ? "h-screen" : ""} p-0 lg:p-0 overflow-hidden`}
-        >
+        <main className={`flex-1 ${isMessagesPage ? "p-0" : "p-4 lg:p-8"}`}>
           <Outlet />
         </main>
       </div>
